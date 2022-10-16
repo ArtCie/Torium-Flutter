@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-toriumapp-staging-124142-authRole",
+      "UnauthRoleArn": "arn:aws:iam::007108578073:role/amplify-toriumapp-staging-124142-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::007108578073:role/amplify-toriumapp-staging-124142-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-toriumapp-staging-124142-deployment",
+      "UnauthRoleName": "amplify-toriumapp-staging-124142-unauthRole",
+      "StackName": "amplify-toriumapp-staging-124142",
+      "StackId": "arn:aws:cloudformation:eu-central-1:007108578073:stack/amplify-toriumapp-staging-124142/e310d640-4d4f-11ed-9078-0ad61e82bd86",
+      "AmplifyAppId": "d1bsgy5v92lumz"
+    },
+    "categories": {
+      "auth": {
+        "toriumapp": {}
+      }
+    }
+  }
+}
