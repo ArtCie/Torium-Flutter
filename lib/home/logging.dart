@@ -1,20 +1,37 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter/material.dart';
-
+import '../autentication/amplify.dart';
 import '../utils.dart';
+import 'loading_screen.dart';
+import '../user_first_login/screen_manager.dart';
 
-
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Logging extends StatefulWidget {
+  const Logging({Key? key}) : super(key: key);
 
   @override
-  _MyHomeState createState() => _MyHomeState();
+  State<Logging> createState() => _LoggingState();
 }
 
-class _MyHomeState extends State<Home> {
+class _LoggingState extends State<Logging> {
+  String? userId;
 
   @override
   void initState() {
     super.initState();
+    getUserId();
+  }
+
+  Future<void> getUserId() async {
+    var userAttributes = await AmplifyConfigure.getUserAttribute();
+    for (var attributes in userAttributes) {
+      if (attributes.userAttributeKey ==
+          const CognitoUserAttributeKey.custom('custom:user_id')) {
+        setState(() {
+          userId = attributes.value;
+          Navigator.pushReplacementNamed(context, '/first_login', arguments: {'userId': attributes.value});
+        });
+      }
+    }
   }
 
   @override
@@ -49,14 +66,14 @@ class _MyHomeState extends State<Home> {
         ],
         backgroundColor: DefaultColors.getDefaultColor(),
       ),
-      body: const SafeArea(child: Text('HOME SCREEN')),
+      body: SafeArea(child: LoadingScreen.getScreen()),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-                IconData(0xe2eb, fontFamily: 'MaterialIcons')
-            ),
-            label: 'Groups',),
+              icon: Icon(
+                  IconData(0xe2eb, fontFamily: 'MaterialIcons')
+              ),
+              label: 'Groups',),
           BottomNavigationBarItem(
               icon: Icon(
                   IconData(0xe23e, fontFamily: 'MaterialIcons')
@@ -69,5 +86,4 @@ class _MyHomeState extends State<Home> {
       ),
     );
   }
-
 }

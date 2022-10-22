@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../utils.dart';
 
 class LoadingScreen{
 
-  final spinkit = SpinKitSquareCircle(
+  final spinkit = const SpinKitSquareCircle(
     color: Colors.white,
-    size: 50.0,
-    controller: AnimationController(vsync: this, duration: const Duration(milliseconds: 1200)),
+    size: 50.0
   );
 
-  static Scaffold getLoadingScreen(){
+  static Scaffold getScreen(){
     return Scaffold(
       body: Center(
         child: SpinKitCubeGrid(
-          color: Colors.teal[300],
+          color: DefaultColors.getDefaultColor(),
           size: 60
         )
       )

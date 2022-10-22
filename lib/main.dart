@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:torium/user_first_login/screen_manager.dart';
 import 'autentication/amplify.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
+import 'user_first_login/preferences_screen.dart';
+import 'user_first_login/mobile/mobile_number_init.dart';
 import 'home/home.dart';
+import 'home/logging.dart';
 
 void main() {
   runApp(const MyApp());
@@ -74,15 +78,22 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: Authenticator.builder(),
           home: const Scaffold(
             body: Center(
-              child: Home(),
+              child: Logging(),
             ),
           ),
+          routes: <String, WidgetBuilder> {
+            '/first_login': (BuildContext context) => ScreenManager(),
+            '/home': (BuildContext context) => Home(),
+            '/preferences': (BuildContext context) => PreferencesScreen(),
+            '/mobile_number_init': (BuildContext context) => MobileNumberInit(),
+          },
         )
     );
   }
 
 // light theme
   ThemeData customLightTheme = ThemeData(
+    fontFamily: 'Poppins',
     // app's colors scheme and brightness
     colorScheme: ColorScheme.fromSwatch(
       brightness: Brightness.light,
@@ -121,6 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // dark theme
   ThemeData customDarkTheme = ThemeData(
+    fontFamily: 'Poppins',
     colorScheme: ColorScheme.fromSwatch(
       brightness: Brightness.dark,
       primarySwatch: Colors.indigo,
