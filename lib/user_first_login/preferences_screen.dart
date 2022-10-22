@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '../autentication/amplify.dart';
 import '../utils.dart';
-import 'mobile/mobile_number_init.dart';
+import '../api/users/patch_preferences.dart';
+import 'organizations/organization_screen.dart';
 
 
 class PreferencesScreen extends StatefulWidget {
-  String ?userId;
+  String userId = "";
   PreferencesScreen({super.key});
 
   @override
@@ -23,8 +24,9 @@ class _ScreenManagerState extends State<PreferencesScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     AmplifyConfigure.getUserId().then((result) {
-      print(result);
-      widget.userId = result;
+      if(result != null) {
+        widget.userId = result;
+      }
     });
 }
 
@@ -69,6 +71,11 @@ class _ScreenManagerState extends State<PreferencesScreen> {
                 Navigator.pushNamed(context, "/mobile_number_init");
                 break;
               case "EMAIL":
+                PatchPreferences(widget.userId, "EMAIL").fetch();
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => OrganizationScreen(widget.userId),
+                    ));
                 break;
               case "PUSH":
                 break;

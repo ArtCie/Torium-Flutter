@@ -83,9 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           routes: <String, WidgetBuilder> {
             '/first_login': (BuildContext context) => ScreenManager(),
-            '/home': (BuildContext context) => Home(),
             '/preferences': (BuildContext context) => PreferencesScreen(),
-            '/mobile_number_init': (BuildContext context) => MobileNumberInit(),
+            '/mobile_number_init': (BuildContext context) => MobileNumberInit()
           },
         )
     );
