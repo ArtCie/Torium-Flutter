@@ -2,18 +2,18 @@ import 'dart:convert';
 
 import '../request_sender.dart';
 
-class PatchOrganization extends RequestSender {
+class PatchPreferences extends RequestSender {
   Map<String, String> headers = {};
   Map<String, String> body = {};
-  String path = "/users/organization";
+  String path = "/users/preferences";
 
-  PatchOrganization(userId, organizationId){
+  PatchPreferences(userId, reminder_preferences){
     headers = {
       "trm-user-id": userId
     };
 
     body = {
-      "organization_id": organizationId.toString()
+      "reminder_preferences": reminder_preferences
     };
   }
 
