@@ -5,6 +5,7 @@ import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'user_first_login/preferences_screen.dart';
 import 'user_first_login/mobile/mobile_number_init.dart';
 import 'home/logging.dart';
+import 'home/settings_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -77,10 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // app's colors scheme and brightness
     colorScheme: ColorScheme.fromSwatch(
       brightness: Brightness.light,
-      primarySwatch: Colors.indigo,
+      primarySwatch: Colors.teal,
     ),
     // tab bar indicator color
-    indicatorColor: Colors.indigo,
+    indicatorColor: Colors.teal,
     textTheme: const TextTheme(
       // text theme of the header on each step
       headline6: TextStyle(
@@ -115,9 +116,9 @@ class _MyHomePageState extends State<MyHomePage> {
     fontFamily: 'Poppins',
     colorScheme: ColorScheme.fromSwatch(
       brightness: Brightness.dark,
-      primarySwatch: Colors.indigo,
+      primarySwatch: Colors.teal,
     ),
-    indicatorColor: Colors.indigo,
+    indicatorColor: Colors.teal,
     textTheme: const TextTheme(
       headline6: TextStyle(
         fontWeight: FontWeight.w600,
