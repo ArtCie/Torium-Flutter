@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:torium/user_first_login/mobile/mobile_number_init.dart';
 import '../autentication/amplify.dart';
 import '../utils.dart';
 import '../api/users/patch_preferences.dart';
@@ -7,7 +8,9 @@ import 'organizations/organization_screen.dart';
 
 class PreferencesScreen extends StatefulWidget {
   String userId = "";
-  PreferencesScreen({super.key});
+  String value;
+  String input;
+  PreferencesScreen({super.key, this.value = "Email", this.input = "first_login"});
 
   @override
   _ScreenManagerState createState() => _ScreenManagerState();
@@ -29,19 +32,17 @@ class _ScreenManagerState extends State<PreferencesScreen> {
       }
     });
 }
-
-  String value = "Email";
   Widget customRadioButton(String text) {
     return SizedBox(
       height: 60.0,
       width: 200.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: (value == text) ? Colors.teal[100]: Colors.grey[300], //<-- SEE HERE
+          backgroundColor: (widget.value == text) ? Colors.teal[100]: Colors.grey[300], //<-- SEE HERE
         ),
         onPressed: () {
           setState(() {
-            value = text;
+            widget.value = text;
           });
         },
         child: Text(
@@ -49,7 +50,7 @@ class _ScreenManagerState extends State<PreferencesScreen> {
           style: TextStyle(
               color: Colors.grey[800],
               fontSize: 15,
-              fontWeight: (value == text) ? FontWeight.bold : FontWeight.normal,
+              fontWeight: (widget.value == text) ? FontWeight.bold : FontWeight.normal,
           )
         ),
       )
@@ -65,25 +66,28 @@ class _ScreenManagerState extends State<PreferencesScreen> {
           backgroundColor: Colors.teal[300]
         ),
         onPressed: () {
-            String valueUpper = value.toUpperCase();
+            String valueUpper = widget.value.toUpperCase();
             switch (valueUpper) {
               case "SMS":
-                Navigator.pushNamed(context, "/mobile_number_init");
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>
+                      MobileNumberInit(inputMethod: widget.input)));
                 break;
               case "EMAIL":
                 PatchPreferences(widget.userId, "EMAIL").fetch();
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => OrganizationScreen(widget.userId),
-                    ));
+                if(widget.input == "settings"){
+                  Navigator.pop(context);
+                }
+                else{
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => OrganizationScreen(widget.userId),
+                      ));
+                }
                 break;
               case "PUSH":
                 break;
             }
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const SecondRoute()),
-            // );
         },
         child: const Text(
             "Continue",

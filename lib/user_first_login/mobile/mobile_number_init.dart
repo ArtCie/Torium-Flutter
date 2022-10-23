@@ -7,7 +7,9 @@ import 'mobile_number_submit_code.dart';
 import '../../utils.dart';
 
 class MobileNumberInit extends StatefulWidget {
-  MobileNumberInit({super.key});
+  MobileNumberInit({super.key, this.inputMethod = "first_login"});
+
+  String inputMethod;
 
   @override
   State<MobileNumberInit> createState() => _MobileNumberInitState();
@@ -91,7 +93,7 @@ class _MobileNumberInitState extends State<MobileNumberInit> {
         onPressed: isValid ? () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MobileNumberSubmitCode(userId, phoneNumber)),
+            MaterialPageRoute(builder: (context) => MobileNumberSubmitCode(userId, phoneNumber, inputMethod: widget.inputMethod)),
           );
         } : null,
         child: const Text("Continue",

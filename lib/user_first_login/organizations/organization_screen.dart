@@ -6,9 +6,11 @@ import '../../home/loading_screen.dart';
 import '../../utils.dart';
 
 class OrganizationScreen extends StatefulWidget {
-  const OrganizationScreen(this.userId, {super.key});
+  OrganizationScreen(this.userId,  {super.key, this.currentId, this.inputMethod = "first_login"});
 
+  int? currentId;
   final String userId;
+  String inputMethod;
 
   @override
   State<OrganizationScreen> createState() => _OrganizationScreenState();
@@ -17,7 +19,6 @@ class OrganizationScreen extends StatefulWidget {
 class _OrganizationScreenState extends State<OrganizationScreen> {
 
   List<Organization> organizationList = [];
-  int ?currentId;
 
   @override
   void initState() {
@@ -52,16 +53,21 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
       width: 150.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: (text == "Skip" || (text == "Continue" && currentId != null)) ? Colors.teal[200] : Colors.grey, //<-- SEE HERE
+          backgroundColor: (text == "Skip" || (text == "Continue" && widget.currentId != null)) ? Colors.teal[200] : Colors.grey, //<-- SEE HERE
         ),
-        onPressed: text == "Skip" || (text == "Continue" && currentId != null) ? () {
-          if(currentId != null){
-            PatchOrganization(widget.userId, currentId).fetch();
+        onPressed: text == "Skip" || (text == "Continue" && widget.currentId != null) ? () {
+          if(widget.currentId != null){
+            PatchOrganization(widget.userId, widget.currentId).fetch();
           }
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => Home(widget.userId),
-              ));
+          if(widget.inputMethod == "settings"){
+            Navigator.pop(context);
+          }
+          else {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => Home(widget.userId),
+                ));
+          }
 
         } : null ,
         child: Text(text,
@@ -123,11 +129,11 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
       padding: const EdgeInsets.all(2.0),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: (currentId == organization.id) ? Colors.teal[100]: Colors.grey[300], //<-- SEE HERE
+          backgroundColor: (widget.currentId == organization.id) ? Colors.teal[100]: Colors.grey[300], //<-- SEE HERE
         ),
         onPressed: () {
           setState(() {
-            currentId = organization.id;
+            widget.currentId = organization.id;
           });
         },
           child: Column(
