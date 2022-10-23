@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import '../../api/users/patch_update_mobile_phone.dart';
 import 'package:code_input/code_input.dart';
 
+import '../../home/home.dart';
 import '../../utils.dart';
 
 class MobileNumberSubmitCode extends StatefulWidget {
-  const MobileNumberSubmitCode(this.userId, this.mobileNumber, {super.key});
+  MobileNumberSubmitCode(this.userId, this.mobileNumber, {super.key, this.inputMethod = "first_login"});
 
   final String userId;
   final String mobileNumber;
+  String inputMethod;
 
   @override
   State<MobileNumberSubmitCode> createState() => _MobileNumberSubmitCodeState();
@@ -96,7 +98,18 @@ class _MobileNumberSubmitCodeState extends State<MobileNumberSubmitCode> {
   void _checkCode(){
     PatchUpdateMobilePhone(widget.userId, _code).fetch().then((result) {
       if(result["status"]["code"].toString() == "200"){
-        Navigator.pushReplacementNamed(context, '/home', arguments: {'userId': widget.userId});
+        if(widget.inputMethod == "settings") {
+          var nav = Navigator.of(context);
+          nav.pop();
+          nav.pop();
+          nav.pop();
+        }
+        else {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => Home(widget.userId),
+              ));
+        }
       }
       else{
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
