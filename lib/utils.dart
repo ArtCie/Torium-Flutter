@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'home/home.dart';
+
 class DefaultColors {
     static Color? getDefaultColor() {
       return Colors.teal[300];
     }
 }
 
-class DefaultAppBar {
-  static AppBar get({bool isProfile = true}) {
+
+class DefaultAppBar extends MyHomeState {
+  AppBar get({bool isProfile = true}) {
     return AppBar(
       title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Image.asset(
@@ -23,22 +26,45 @@ class DefaultAppBar {
         ),
       ]),
       backgroundColor: DefaultColors.getDefaultColor(),
-      actions: <Widget>[
-        Visibility(
-          visible: isProfile,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-            child: IconButton(
-              icon: const Icon(
-                IconData(0xf522, fontFamily: 'MaterialIcons'),
-                color: Colors.white,
-                size: 35,
-              ),
-              onPressed: () {},
-            ),
-          ),
-        )
-      ],
+      actions: <Widget>[getProfileAction(isProfile)],
     );
+  }
+
+  Visibility getProfileAction(bool isProfile) {
+    return Visibility(
+        visible: isProfile,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+
+          child: PopupMenuButton(
+            icon: const Icon(
+              IconData(0xf522, fontFamily: 'MaterialIcons'),
+              color: Colors.white,
+              size: 35,
+            ),
+            // Callback that sets the selected popup menu item.
+              onSelected: (item) {
+                redirectAction(item);
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                const PopupMenuItem(
+                  value: "Settings",
+                  child: Text('Settings'),
+                ),
+                const PopupMenuItem(
+                  value: "Log out",
+                  child: Text('Log out'),
+                ),
+              ]),
+          // child: IconButton(
+          //   icon: const Icon(
+          //     IconData(0xf522, fontFamily: 'MaterialIcons'),
+          //     color: Colors.white,
+          //     size: 35,
+          //   ),
+          //   onPressed: () {},
+          // ),
+        ),
+      );
   }
 }

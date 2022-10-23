@@ -40,9 +40,7 @@ class AmplifyConfigure {
     return userId;
   }
 
-  // static Future<AuthUser> getCurrentUser() async {
-  //     Amplify.Auth.fetchAuthSession();
-  //     final user = await Amplify.Auth.getCurrentUser();
-  //     return user;
-  // }
+  static void logOut() {
+    Amplify.Auth.signOut();
+  }
 }

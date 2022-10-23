@@ -29,7 +29,7 @@ class _MobileNumberInitState extends State<MobileNumberInit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar.get(isProfile: false),
+      appBar: DefaultAppBar().get(isProfile: false),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(30.0),
