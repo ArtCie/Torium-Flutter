@@ -42,7 +42,6 @@ class DefaultAppBar extends MyHomeState {
               color: Colors.white,
               size: 35,
             ),
-            // Callback that sets the selected popup menu item.
               onSelected: (item) {
                 redirectAction(item);
               },
@@ -55,15 +54,8 @@ class DefaultAppBar extends MyHomeState {
                   value: "Log out",
                   child: Text('Log out'),
                 ),
-              ]),
-          // child: IconButton(
-          //   icon: const Icon(
-          //     IconData(0xf522, fontFamily: 'MaterialIcons'),
-          //     color: Colors.white,
-          //     size: 35,
-          //   ),
-          //   onPressed: () {},
-          // ),
+              ]
+          ),
         ),
       );
   }
