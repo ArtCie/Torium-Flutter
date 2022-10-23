@@ -41,7 +41,7 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar.get(isProfile: false),
+      appBar: DefaultAppBar().get(isProfile: false),
       body: SafeArea(child: (organizationList == []) ? LoadingScreen.getScreen() : getOrganizationScreen()),
     );
   }
