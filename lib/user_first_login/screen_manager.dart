@@ -39,7 +39,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         if(data["data"]["reminder_preferences"] == null){
           Navigator.pushReplacementNamed(context, '/preferences');
         }
-        else if(data["data"]["organization"] == null){
+        else if(data["data"]["organization_id"] == null){
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => OrganizationScreen(widget.userId),
