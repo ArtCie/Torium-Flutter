@@ -1,14 +1,27 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:torium/user_first_login/screen_manager.dart';
 import 'autentication/amplify.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'user_first_login/preferences_screen.dart';
 import 'user_first_login/mobile/mobile_number_init.dart';
 import 'home/logging.dart';
-import 'home/settings_screen.dart';
+import 'firebase/firebase_handler.dart';
 
-void main() {
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async{
+  await Firebase.initializeApp();
+  }
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await AmplifyConfigure().configureAmplify();
+  await FirebaseHandler().configureFirebase();
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatefulWidget {
@@ -24,7 +37,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    AmplifyConfigure.configureAmplify();
   }
 
   @override
@@ -37,6 +49,29 @@ class _MyAppState extends State<MyApp> {
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
+
+  // void initMessaging() {
+  //   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  //   FlutterLocalNotificationsPlugin? fltNotification;
+  //   var androiInit = AndroidInitializationSettings("@mipmap/ic_launcher");
+  //   // var iosInit = IOSInitializationSettings();
+  //   // var initSetting = InitializationSettings(android: androiInit, iOS: iosInit);
+  //   var initSetting = InitializationSettings(android: androiInit);
+  //   fltNotification = FlutterLocalNotificationsPlugin();
+  //   fltNotification.initialize(initSetting);
+  //   var androidDetails =
+  //   AndroidNotificationDetails("1", "channelName");
+  //   // var iosDetails = IOSNotificationDetails();
+  //   var generalNotificationDetails =
+  //   // NotificationDetails(android: androidDetails, iOS: iosDetails);
+  //   NotificationDetails(android: androidDetails);
+  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //     RemoteNotification? notification=message.notification;
+  //     AndroidNotification? android=message.notification?.android;
+  //     if(notification!=null && android!=null){
+  //       fltNotification?.show(
+  //           notification.hashCode, notification.title, notification.body, generalNotificationDetails);
+  //     }});}
 }
 
 class MyHomePage extends StatefulWidget {
