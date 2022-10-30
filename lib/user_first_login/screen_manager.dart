@@ -1,8 +1,11 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../autentication/amplify.dart';
 import 'package:flutter/material.dart';
 import '../home/home.dart';
 import '../home/loading_screen.dart';
 import '../api/users/get_user_preferences.dart';
+import '../api/users/patch_device.dart';
 import 'package:flutter/services.dart';
 import '../user_first_login/organizations/organization_screen.dart';
 import '../utils.dart';
@@ -36,6 +39,8 @@ class _ScreenManagerState extends State<ScreenManager> {
     widget.userId = (await AmplifyConfigure.getUserId())!;
     getUserPreferences().then((data) {
       setState(() {
+        print("setState let's gooo");
+        checkDeviceToken(data);
         if(data["data"]["reminder_preferences"] == null){
           Navigator.pushReplacementNamed(context, '/preferences');
         }
@@ -67,5 +72,13 @@ class _ScreenManagerState extends State<ScreenManager> {
       appBar: DefaultAppBar().get(isProfile: false),
       body: SafeArea(child: widget.currentPage),
     );
+  }
+
+  Future<void> checkDeviceToken(Map data) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? deviceToken = prefs.getString('device_token');
+    if(data["data"]["device_token"] != deviceToken){
+      PatchDevice(widget.userId, deviceToken).fetch();
+    }
   }
 }

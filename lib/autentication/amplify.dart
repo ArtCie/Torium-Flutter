@@ -1,6 +1,9 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../amplifyconfiguration.dart';
@@ -8,10 +11,9 @@ import '../amplifyconfiguration.dart';
 
 class AmplifyConfigure {
 
-  String userId = "";
-
-  static Future<void> configureAmplify() async {
+  Future<void> configureAmplify() async {
     try {
+
       final auth = AmplifyAuthCognito();
       await Amplify.addPlugin(auth);
 
