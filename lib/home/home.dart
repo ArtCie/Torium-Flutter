@@ -3,12 +3,14 @@ import 'package:torium/autentication/amplify.dart';
 import 'package:torium/home/settings_screen.dart';
 
 import '../utils.dart';
+import 'content_loaders/group.dart';
+import '../../api/groups/get_user_groups.dart';
+import 'loading_screen.dart';
 
 
 class Home extends StatefulWidget {
-  final String userId;
 
-  const Home(this.userId, {super.key});
+  Home({super.key});
 
   @override
   MyHomeState createState() => MyHomeState();
@@ -16,33 +18,89 @@ class Home extends StatefulWidget {
 
 class MyHomeState extends State<Home> {
 
+  String? userId;
+  bool isLoaded = false;
+  List<Group> userGroups = [];
+
   @override
   void initState() {
     super.initState();
   }
 
   @override
+  Future<void> didChangeDependencies() async {
+    print("JAZDA");
+    userId = (await AmplifyConfigure.getUserId())!;
+    await GetUserGroups(userId!).fetch().then((result) async {
+      setState(() {
+        print(result.toString());
+        for (var group in result["data"]) {
+          userGroups.add(Group(
+              group["admin_id"], group["group_id"],
+              group["name"], group["status"]));
+        }
+        isLoaded = true;
+      });
+    });
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: getAppBar(),
-      body: const SafeArea(child: Text('HOME SCREEN')),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-                IconData(0xe2eb, fontFamily: 'MaterialIcons')
-            ),
-            label: 'Groups',),
-          BottomNavigationBarItem(
-              icon: Icon(
-                  IconData(0xe23e, fontFamily: 'MaterialIcons')
+      appBar: buildAppBar(),
+      body: Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 30.0, horizontal: 40.0),
+                child: Text(
+                    "Groups",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.grey[800],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25)
+                ),
               ),
-              label: 'Events')
-        ],
-        backgroundColor: DefaultColors.getDefaultColor(),
-        selectedItemColor: Colors.yellow,
-        unselectedItemColor: Colors.black87,
+              Expanded(child:
+                isLoaded == false ? LoadingScreen.getScreen() : buildGroupsScreen()
+              ),
+            ]
+        ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print("OKAY LET'S GO");
+        },
+        backgroundColor: DefaultColors.getDefaultColor(),
+        child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: buildBottomNavigationBar(),
+    );
+  }
+
+  BottomNavigationBar buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(
+              IconData(0xe2eb, fontFamily: 'MaterialIcons')
+          ),
+          label: 'Groups',
+        ),
+        BottomNavigationBarItem(
+            icon: Icon(
+                IconData(0xe23e, fontFamily: 'MaterialIcons')
+            ),
+            label: 'Events'
+        )
+      ],
+      backgroundColor: DefaultColors.getDefaultColor(),
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.black87,
     );
   }
 
@@ -53,7 +111,7 @@ class MyHomeState extends State<Home> {
       AmplifyConfigure.logOut();
     }
     else{
-      print(widget.userId);
+      print(userId);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SettingsScreen()),
@@ -61,7 +119,7 @@ class MyHomeState extends State<Home> {
     }
   }
 
-  AppBar getAppBar({bool isProfile = true}) {
+  AppBar buildAppBar({bool isProfile = true}) {
     return AppBar(
       title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         Image.asset(
@@ -108,6 +166,53 @@ class MyHomeState extends State<Home> {
             ]
         ),
       ),
+    );
+  }
+
+  ListView buildGroupsScreen() {
+    return ListView.builder(
+      itemCount: userGroups.length,
+      itemBuilder: (_, index) {
+        return Card(
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: 120,
+            child: ListTile(
+                // leading: settingTypes[index].icon,
+                title: Text(userGroups[index].name),
+                // subtitle: Text(settingTypes[index].value),
+                trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget> [
+                      Visibility(
+                        visible: userGroups[index].status != "standard",
+                        child: IconButton(
+                          icon: const Icon(
+                              IconData(0xf6fb, fontFamily: 'MaterialIcons',
+                              matchTextDirection: true)
+                                ),
+                          onPressed: () { print("DUPA"); },
+                        ),
+                      ),
+                      Visibility(
+                        visible: userGroups[index].status == "admin",
+                        child: IconButton(
+                          icon: const Icon(
+                              IconData(0xf645, fontFamily: 'MaterialIcons',
+                                  matchTextDirection: true)
+                          ),
+                          onPressed: () { print("DUPA"); },
+                        ),
+                      )
+                  ]
+                ),
+                onTap: () {
+
+                }  // Handle your onTap here.
+            ),
+          ),
+        );
+      },
     );
   }
 }

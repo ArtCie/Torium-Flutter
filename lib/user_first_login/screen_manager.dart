@@ -37,9 +37,10 @@ class _ScreenManagerState extends State<ScreenManager> {
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
     widget.userId = (await AmplifyConfigure.getUserId())!;
+    print("TEST");
+    print(widget.userId);
     getUserPreferences().then((data) {
       setState(() {
-        print("setState let's gooo");
         checkDeviceToken(data);
         if(data["data"]["reminder_preferences"] == null){
           Navigator.pushReplacementNamed(context, '/preferences');
@@ -51,9 +52,10 @@ class _ScreenManagerState extends State<ScreenManager> {
               ));
         }
         else {
+          print("LAUNCH");
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => Home(widget.userId),
+                builder: (context) => Home(),
               ));
         }
       });
