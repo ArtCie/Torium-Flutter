@@ -65,7 +65,7 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
           else {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => Home(widget.userId),
+                  builder: (context) => Home(),
                 ));
           }
 

@@ -107,7 +107,7 @@ class _MobileNumberSubmitCodeState extends State<MobileNumberSubmitCode> {
         else {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => Home(widget.userId),
+                builder: (context) => Home(),
               ));
         }
       }
