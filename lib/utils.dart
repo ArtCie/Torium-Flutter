@@ -9,7 +9,7 @@ class DefaultColors {
 }
 
 
-class DefaultAppBar extends MyHomeState {
+class DefaultWidgets extends MyHomeState {
   AppBar get({bool isProfile = true}) {
     return AppBar(
       title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -58,5 +58,15 @@ class DefaultAppBar extends MyHomeState {
           ),
         ),
       );
+  }
+
+  static SnackBar getErrorSnackBar() {
+    return SnackBar(
+      content: const Text('Something went wrong :('),
+      action: SnackBarAction(
+        label: 'ok :<',
+        onPressed: () {  }
+      )
+    );
   }
 }

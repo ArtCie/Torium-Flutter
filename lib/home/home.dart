@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:torium/autentication/amplify.dart';
 import 'package:torium/home/settings_screen.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../utils.dart';
 import 'content_loaders/group.dart';
 import '../../api/groups/get_user_groups.dart';
+import '../../api/groups/delete_user_group.dart';
 import 'loading_screen.dart';
 
 
@@ -174,45 +176,70 @@ class MyHomeState extends State<Home> {
       itemCount: userGroups.length,
       itemBuilder: (_, index) {
         return Card(
-          child: Container(
-            alignment: Alignment.centerLeft,
-            height: 120,
-            child: ListTile(
-                // leading: settingTypes[index].icon,
-                title: Text(userGroups[index].name),
-                // subtitle: Text(settingTypes[index].value),
-                trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget> [
-                      Visibility(
-                        visible: userGroups[index].status != "standard",
-                        child: IconButton(
-                          icon: const Icon(
-                              IconData(0xf6fb, fontFamily: 'MaterialIcons',
-                              matchTextDirection: true)
-                                ),
-                          onPressed: () { print("DUPA"); },
-                        ),
+          child: ListTile(
+              // leading: settingTypes[index].icon,
+              contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
+              title: Text(userGroups[index].name),
+              // subtitle: Text(settingTypes[index].value),
+              trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget> [
+                    Visibility(
+                      visible: userGroups[index].status != "standard",
+                      child: IconButton(
+                        icon: const Icon(
+                            IconData(0xf6fb, fontFamily: 'MaterialIcons',
+                            matchTextDirection: true)
+                              ),
+                        onPressed: () { print("DUPA"); },
                       ),
-                      Visibility(
-                        visible: userGroups[index].status == "admin",
-                        child: IconButton(
-                          icon: const Icon(
-                              IconData(0xf645, fontFamily: 'MaterialIcons',
-                                  matchTextDirection: true)
-                          ),
-                          onPressed: () { print("DUPA"); },
+                    ),
+                    Visibility(
+                      visible: userGroups[index].status == "admin",
+                      child: IconButton(
+                        icon: const Icon(
+                            IconData(0xf645, fontFamily: 'MaterialIcons',
+                                matchTextDirection: true)
                         ),
-                      )
-                  ]
-                ),
-                onTap: () {
+                        onPressed: () {
+                          QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.error,
+                            text: 'Do you want to remove ${userGroups[index].name}?',
+                            confirmBtnText: 'Yes',
+                            cancelBtnText: 'No',
+                            confirmBtnColor: Colors.red,
+                            showCancelBtn: true,
+                              onConfirmBtnTap: () {
+                                deleteGroup(index);
+                              }
+                          );
+                        },
+                      ),
+                    )
+                ]
+              ),
+              onTap: () {
 
-                }  // Handle your onTap here.
-            ),
+              }  // Handle your onTap here.
           ),
         );
       },
     );
+  }
+
+  void deleteGroup(int index) {
+    Navigator.of(context, rootNavigator: true).pop();
+    DeleteUserGroup(userId!, userGroups[index].groupId).fetch().then((result){
+      if(result["status"]["code"] != 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            DefaultWidgets.getErrorSnackBar()
+        );
+        return;
+      }
+      setState(() {
+        userGroups.removeAt(index);
+      });
+    });
   }
 }

@@ -66,6 +66,28 @@ class RequestSender{
     return {};
   }
 
+  Future<Map> delete(String path, Map<String, String> requestHeaders, Map<dynamic, dynamic> body) async {
+    try {
+      var url = Uri.http(domain, path);
+      var bodyParsed = json.encode(body);
+      var headers = addApplicationType(requestHeaders);
+
+      var response = await http.delete(
+          url,
+          headers: headers,
+          body: bodyParsed
+      );
+      if (response.statusCode == 200) {
+        return convert.jsonDecode(response.body) as Map<String, dynamic>;
+      }
+    }
+    catch(error) {
+      print(error);
+      return {};
+    }
+    return {};
+  }
+
   Map<String, String> addApplicationType(Map<String, String> requestHeaders){
     requestHeaders["content-type"] = 'application/json';
     return requestHeaders;
