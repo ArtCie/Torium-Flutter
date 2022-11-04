@@ -88,6 +88,26 @@ class RequestSender{
     return {};
   }
 
+  Future<Map> postEmpty(String path, Map<String, String> requestHeaders) async {
+    try {
+      var url = Uri.http(domain, path);
+      var headers = addApplicationType(requestHeaders);
+
+      var response = await http.post(
+          url,
+          headers: headers
+      );
+      if (response.statusCode == 200) {
+        return convert.jsonDecode(response.body) as Map<String, dynamic>;
+      }
+    }
+    catch(error) {
+      print(error);
+      return {};
+    }
+    return {};
+  }
+
   Map<String, String> addApplicationType(Map<String, String> requestHeaders){
     requestHeaders["content-type"] = 'application/json';
     return requestHeaders;

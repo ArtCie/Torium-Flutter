@@ -4,7 +4,8 @@ import 'package:torium/home/settings_screen.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../utils.dart';
-import 'content_loaders/group.dart';
+import 'group_screens/add_group/add_group_screen.dart';
+import 'group_screens/add_group/group.dart';
 import '../../api/groups/get_user_groups.dart';
 import '../../api/groups/delete_user_group.dart';
 import 'loading_screen.dart';
@@ -31,15 +32,13 @@ class MyHomeState extends State<Home> {
 
   @override
   Future<void> didChangeDependencies() async {
-    print("JAZDA");
     userId = (await AmplifyConfigure.getUserId())!;
     await GetUserGroups(userId!).fetch().then((result) async {
       setState(() {
-        print(result.toString());
         for (var group in result["data"]) {
           userGroups.add(Group(
               group["admin_id"], group["group_id"],
-              group["name"], group["status"]));
+              group["name"], group["description"], group["status"]));
         }
         isLoaded = true;
       });
@@ -75,7 +74,10 @@ class MyHomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print("OKAY LET'S GO");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddGroupScreen(userId: userId!)),
+          );
         },
         backgroundColor: DefaultColors.getDefaultColor(),
         child: const Icon(Icons.add),
@@ -113,7 +115,6 @@ class MyHomeState extends State<Home> {
       AmplifyConfigure.logOut();
     }
     else{
-      print(userId);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SettingsScreen()),
