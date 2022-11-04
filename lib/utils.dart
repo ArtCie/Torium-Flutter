@@ -26,6 +26,8 @@ class DefaultWidgets extends MyHomeState {
         ),
       ]),
       backgroundColor: DefaultColors.getDefaultColor(),
+      // backgroundColor: Colors.white,
+      // elevation: 0,
       actions: <Widget>[getProfileAction(isProfile)],
     );
   }
@@ -67,6 +69,12 @@ class DefaultWidgets extends MyHomeState {
         label: 'ok :<',
         onPressed: () {  }
       )
+    );
+  }
+
+  static SnackBar getErrorSnackBarParam(String text) {
+    return SnackBar(
+        content: Text(text)
     );
   }
 }
