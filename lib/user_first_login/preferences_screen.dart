@@ -103,7 +103,7 @@ class _ScreenManagerState extends State<PreferencesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar().get(isProfile: false),
+      appBar: DefaultWidgets().get(isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
