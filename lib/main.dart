@@ -1,12 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:torium/user_first_login/screen_manager.dart';
-import 'autentication/amplify.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
+
+import 'authentication/amplify.dart';
 import 'user_first_login/preferences_screen.dart';
 import 'user_first_login/mobile/mobile_number_init.dart';
 import 'home/logging.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:torium/user_first_login/mobile/mobile_number_init.dart';
-import '../autentication/amplify.dart';
+import '../authentication/amplify.dart';
 import '../utils.dart';
 import '../api/users/patch_preferences.dart';
 import 'organizations/organization_screen.dart';

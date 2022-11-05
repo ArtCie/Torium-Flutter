@@ -1,15 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
-import '../api/groups/delete_user_group.dart';
-import '../api/groups/get_user_groups.dart';
-import '../autentication/amplify.dart';
-import '../utils.dart';
-import 'group_screens/add_group/add_group_screen.dart';
-import 'group_screens/add_group/group.dart';
-import 'loading_screen.dart';
+import '../../api/groups/delete_user_group.dart';
+import '../../api/groups/get_user_groups.dart';
+import '../../authentication/amplify.dart';
+import '../../utils.dart';
+import '../group_screens/add_group/add_group_screen.dart';
+import '../group_screens/add_group/group.dart';
+import '../loading_screen.dart';
 
 class GroupsScreen extends StatefulWidget{
   const GroupsScreen({Key? key}) : super(key: key);
@@ -24,7 +23,6 @@ class _GroupsState extends State<GroupsScreen>{
 
   void initState() {
     super.initState();
-    print("TEST GROUPS");
   }
 
   @override
@@ -51,18 +49,7 @@ class _GroupsState extends State<GroupsScreen>{
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 30.0, horizontal: 40.0),
-                child: Text(
-                    "Groups",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.grey[800],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25)
-                ),
-              ),
+              DefaultWidgets.buildHeader("Groups"),
               Expanded(child:
               isLoaded == false ? LoadingScreen.getScreen() : buildGroupsScreen()
               ),
@@ -105,7 +92,7 @@ class _GroupsState extends State<GroupsScreen>{
                             IconData(0xf6fb, fontFamily: 'MaterialIcons',
                                 matchTextDirection: true)
                         ),
-                        onPressed: () { print("DUPA"); },
+                        onPressed: () { },
                       ),
                     ),
                     Visibility(
@@ -135,7 +122,7 @@ class _GroupsState extends State<GroupsScreen>{
               ),
               onTap: () {
 
-              }  // Handle your onTap here.
+              }
           ),
         );
       },

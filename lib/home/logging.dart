@@ -1,9 +1,8 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter/material.dart';
-import '../autentication/amplify.dart';
+import '../authentication/amplify.dart';
 import '../utils.dart';
 import 'loading_screen.dart';
-import '../user_first_login/screen_manager.dart';
 
 class Logging extends StatefulWidget {
   const Logging({Key? key}) : super(key: key);

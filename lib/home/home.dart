@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:torium/autentication/amplify.dart';
+import 'package:torium/authentication/amplify.dart';
 import 'package:torium/home/settings_screen.dart';
 import 'package:badges/badges.dart';
 
 import '../api/groups/invitations/get_invitations_count.dart';
 
 import '../utils.dart';
-import 'groups_screen.dart';
-
+import 'navigator_bar_screens/groups_screen.dart';
+import 'navigator_bar_screens/notification_screen/notification_screen.dart';
 
 class Home extends StatefulWidget {
 
@@ -25,7 +25,7 @@ class MyHomeState extends State<Home> {
   final screens = [
     GroupsScreen(),
     GroupsScreen(),
-    GroupsScreen()
+    NotificationScreen()
   ];
 
   String? userId;
