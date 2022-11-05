@@ -26,8 +26,6 @@ class DefaultWidgets extends MyHomeState {
         ),
       ]),
       backgroundColor: DefaultColors.getDefaultColor(),
-      // backgroundColor: Colors.white,
-      // elevation: 0,
       actions: <Widget>[getProfileAction(isProfile)],
     );
   }
