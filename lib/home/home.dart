@@ -35,6 +35,7 @@ class MyHomeState extends State<Home> {
     userId = (await AmplifyConfigure.getUserId())!;
     await GetUserGroups(userId!).fetch().then((result) async {
       setState(() {
+        userGroups = [];
         for (var group in result["data"]) {
           userGroups.add(Group(
               group["admin_id"], group["group_id"],
@@ -77,13 +78,18 @@ class MyHomeState extends State<Home> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddGroupScreen(userId: userId!)),
-          );
+          ).then(onGoBack);
+
         },
         backgroundColor: DefaultColors.getDefaultColor(),
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: buildBottomNavigationBar(),
     );
+  }
+
+  onGoBack(dynamic value) {
+    didChangeDependencies();
   }
 
   BottomNavigationBar buildBottomNavigationBar() {
@@ -178,10 +184,8 @@ class MyHomeState extends State<Home> {
       itemBuilder: (_, index) {
         return Card(
           child: ListTile(
-              // leading: settingTypes[index].icon,
               contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
               title: Text(userGroups[index].name),
-              // subtitle: Text(settingTypes[index].value),
               trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget> [
