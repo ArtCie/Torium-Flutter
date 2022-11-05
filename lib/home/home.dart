@@ -3,6 +3,8 @@ import 'package:torium/autentication/amplify.dart';
 import 'package:torium/home/settings_screen.dart';
 import 'package:badges/badges.dart';
 
+import '../api/groups/invitations/get_invitations_count.dart';
+
 import '../utils.dart';
 import 'groups_screen.dart';
 
@@ -17,7 +19,8 @@ class Home extends StatefulWidget {
 
 class MyHomeState extends State<Home> {
   int _selectedIndex = 0;
-  bool isClicked = false;
+  bool hasNotificationsToShow = false;
+  int numberOfNotifications = 0;
 
   final screens = [
     GroupsScreen(),
@@ -35,7 +38,19 @@ class MyHomeState extends State<Home> {
   @override
   Future<void> didChangeDependencies() async {
     userId = (await AmplifyConfigure.getUserId())!;
+    await getInvitationCount(userId);
     super.didChangeDependencies();
+  }
+
+  getInvitationCount(String? userId) async {
+    var result = await GetInvitationsCount(userId!).fetch();
+    int notificationCount = result["data"]["count"];
+    if(notificationCount != 0){
+      setState(() {
+        hasNotificationsToShow = true;
+        numberOfNotifications = notificationCount;
+      });
+    }
   }
 
   @override
@@ -139,15 +154,16 @@ class MyHomeState extends State<Home> {
     setState(() {
       _selectedIndex = index;
       if(index == 2){
-        isClicked = true;
+        hasNotificationsToShow = false;
       }
     });
   }
 
   BottomNavigationBarItem buildNotificationNavigationBar(){
+    print(numberOfNotifications);
     return BottomNavigationBarItem(
-      icon: !isClicked ? Badge(
-        badgeContent: const Text('3'),
+      icon: hasNotificationsToShow ? Badge(
+        badgeContent: Text(numberOfNotifications.toString()),
         child: const Icon(
                 IconData(0xf0027, fontFamily: 'MaterialIcons')
             ),
