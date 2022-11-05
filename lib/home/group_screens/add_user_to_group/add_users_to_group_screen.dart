@@ -76,7 +76,7 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
               Row(
                 children: <Widget>[
                   buildTextFormField("User email", userEmailController),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   buildIconButton(),
                 ],
               ),
@@ -100,12 +100,8 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
                   tooltip: 'Add',
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      print("Email ${userEmailController.text}");
                       checkIfUserExist(userEmailController.text);
                     }
-                    // setState(() {
-                    //
-                    // });
                   },
                 );
   }
@@ -149,9 +145,14 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
       width: 250.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(backgroundColor: Colors.teal[300]),
-        onPressed: () {
-          insertGroupAndSendInvitations();
+        onPressed: () async {
+          await insertGroupAndSendInvitations();
 
+          int count = 0;
+          if(!mounted) return;
+          Navigator.popUntil(context, (route) {
+            return count++ == 2;
+          });
         },
         child: const Text("Done!",
             style: TextStyle(
@@ -186,12 +187,9 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
         );
         return;
       }
-      
-
       setState(() {
         usersToAdd.insert(0, User(result["data"]["user_id"], email));
       });
-
     }
     );
   }
@@ -204,10 +202,8 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
         itemBuilder: (_, index) {
           return Card(
             child: ListTile(
-              // leading: settingTypes[index].icon,
                 contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
                 title: Text(usersToAdd[index].email),
-                // subtitle: Text(settingTypes[index].value),
                 trailing:
                       IconButton(
                         icon: const Icon(
@@ -227,9 +223,19 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
     );
   }
 
-  void insertGroupAndSendInvitations() {
-    // PostUserGroup postUserGroup = PostUserGroup(widget.userId, widget.groupName, widget.groupDescription);
-    // await result = postUserGroup.fetch();
+  Future<void> insertGroupAndSendInvitations() async {
+    PostUserGroup postUserGroup = PostUserGroup(widget.userId, widget.groupName, widget.groupDescription);
+    await postUserGroup.fetch().then((result) {
+      int groupId = result["data"]["group_id"];
+      inviteUsersToGroup(groupId);
+    });
+  }
 
+   inviteUsersToGroup(int groupId) {
+    for(User user in usersToAdd){
+      PostGroupMembers(user.userId, groupId).fetch().then((result) {
+        print(result);
+      });
+    }
   }
 }
