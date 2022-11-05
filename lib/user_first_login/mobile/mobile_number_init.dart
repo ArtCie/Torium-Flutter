@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:phone_number/phone_number.dart';
-import '../../autentication/amplify.dart';
+import '../../authentication/amplify.dart';
 import 'mobile_number_submit_code.dart';
 
 import '../../utils.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../autentication/amplify.dart';
+import '../authentication/amplify.dart';
 import '../user_first_login/organizations/organization_screen.dart';
 import '../user_first_login/preferences_screen.dart';
 import '../utils.dart';

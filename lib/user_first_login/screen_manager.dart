@@ -1,12 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../autentication/amplify.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+
+import '../authentication/amplify.dart';
 import '../home/home.dart';
 import '../home/loading_screen.dart';
 import '../api/users/get_user_preferences.dart';
 import '../api/users/patch_device.dart';
-import 'package:flutter/services.dart';
 import '../user_first_login/organizations/organization_screen.dart';
 import '../utils.dart';
 
