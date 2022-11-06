@@ -80,7 +80,7 @@ class DefaultWidgets extends MyHomeState {
     return Align(
       alignment: alignment,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: vertical, horizontal: 40.0),
+        padding: EdgeInsets.symmetric(vertical: vertical, horizontal: 20.0),
         child: Text(
             text,
             textAlign: TextAlign.center,
