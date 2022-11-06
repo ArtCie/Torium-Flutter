@@ -76,17 +76,19 @@ class DefaultWidgets extends MyHomeState {
     );
   }
 
-  static Padding buildHeader(String text){
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 30.0, horizontal: 40.0),
-      child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Colors.grey[800],
-              fontWeight: FontWeight.bold,
-              fontSize: 25)
+  static Align buildHeader(String text, {double vertical = 30.0, Alignment alignment = Alignment.center}){
+    return Align(
+      alignment: alignment,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: vertical, horizontal: 40.0),
+        child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.grey[800],
+                fontWeight: FontWeight.bold,
+                fontSize: 25)
+        ),
       ),
     );
   }
