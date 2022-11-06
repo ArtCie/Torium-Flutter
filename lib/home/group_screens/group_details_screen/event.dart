@@ -10,7 +10,6 @@ class Event{
     _description = description;
     var datetimeParsed = DateTime.parse(datetime);
     _datetime = DateFormat('dd MMM yyyy h:mm a').format(datetimeParsed);
-
   }
 
   String get name => _name;
