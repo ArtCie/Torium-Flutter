@@ -8,6 +8,7 @@ import '../../authentication/amplify.dart';
 import '../../utils.dart';
 import '../group_screens/add_group/add_group_screen.dart';
 import '../group_screens/add_group/group.dart';
+import '../group_screens/group_details_screen/group_details_screen.dart';
 import '../loading_screen.dart';
 
 class GroupsScreen extends StatefulWidget{
@@ -51,7 +52,7 @@ class _GroupsState extends State<GroupsScreen>{
             children: <Widget>[
               DefaultWidgets.buildHeader("Groups"),
               Expanded(child:
-              isLoaded == false ? LoadingScreen.getScreen() : buildGroupsScreen()
+              !isLoaded ? LoadingScreen.getScreen() : buildGroupsScreen()
               ),
             ]
         ),
@@ -121,7 +122,15 @@ class _GroupsState extends State<GroupsScreen>{
                   ]
               ),
               onTap: () {
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GroupDetailsScreen(
+                      userId: userId!,
+                      groupId: userGroups[index].groupId,
+                      groupName: userGroups[index].name,
+                      groupDescription: userGroups[index].description)
+                  ),
+                ).then(onGoBack);
               }
           ),
         );
