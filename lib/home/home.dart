@@ -25,6 +25,7 @@ class MyHomeState extends State<Home> {
   final screens = [
     GroupsScreen(),
     GroupsScreen(),
+    GroupsScreen(),
     NotificationScreen()
   ];
 
@@ -56,7 +57,7 @@ class MyHomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: DefaultWidgets().buildAppBar(),
       body: screens[_selectedIndex],
       bottomNavigationBar: buildBottomNavigationBar(),
     );
@@ -74,79 +75,29 @@ class MyHomeState extends State<Home> {
     }
   }
 
-  AppBar buildAppBar({bool isProfile = true}) {
-    return AppBar(
-      title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Image.asset(
-          'assets/yellow.png',
-          fit: BoxFit.cover,
-          height: 50,
-          width: 50,
-        ),
-        const Text(
-          'Torium',
-          style: TextStyle(
-              letterSpacing: 5, fontSize: 20, color: Colors.black87),
-        ),
-      ]),
-      backgroundColor: DefaultColors.getDefaultColor(),
-      actions: <Widget>[getProfileAction(isProfile)],
-    );
-  }
-
-  Visibility getProfileAction(bool isProfile) {
-    return Visibility(
-      visible: isProfile,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-
-        child: PopupMenuButton(
-            icon: const Icon(
-              IconData(0xf522, fontFamily: 'MaterialIcons'),
-              color: Colors.white,
-              size: 35,
-            ),
-            onSelected: (item) {
-              redirectAction(item);
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-              const PopupMenuItem(
-                value: "Settings",
-                child: Text('Settings'),
-              ),
-              const PopupMenuItem(
-                value: "Log out",
-                child: Text('Log out'),
-              ),
-            ]
-        ),
-      ),
-    );
-  }
-
 
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
       items: <BottomNavigationBarItem>[
-        const BottomNavigationBarItem(
-          icon: Icon(
-              IconData(0xe2eb, fontFamily: 'MaterialIcons')
-          ),
-          label: 'Groups',
-        ),
-        const BottomNavigationBarItem(
-            icon: Icon(
-                IconData(0xe23e, fontFamily: 'MaterialIcons')
-            ),
-            label: 'Events'
-        ),
+        buildBottomNavigationBarItem('Groups', 0xe2eb),
+        buildBottomNavigationBarItem('Events', 0xe23e),
+        buildBottomNavigationBarItem('Calendar', 0xf06c8),
         buildNotificationNavigationBar(),
       ],
       backgroundColor: DefaultColors.getDefaultColor(),
-      selectedItemColor: Colors.white,
+      selectedItemColor: Colors.black38,
       unselectedItemColor: Colors.black87,
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
+    );
+  }
+
+  BottomNavigationBarItem buildBottomNavigationBarItem(String text, var icon){
+    return BottomNavigationBarItem(
+        icon: Icon(
+            IconData(icon, fontFamily: 'MaterialIcons')
+        ),
+        label: text
     );
   }
 

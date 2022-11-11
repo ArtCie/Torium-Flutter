@@ -31,7 +31,7 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset : false,
-      appBar: DefaultWidgets().get(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

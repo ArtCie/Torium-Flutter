@@ -68,7 +68,7 @@ class _ScreenManagerState extends State<ScreenManager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultWidgets().get(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(isProfile: false),
       body: SafeArea(child: widget.currentPage),
     );
   }
