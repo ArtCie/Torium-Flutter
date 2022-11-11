@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:torium/api/groups_members/get_group_members.dart';
 
-import '../../../../utils.dart';
-import '../../../loading_screen.dart';
-import 'member.dart';
+import '../../../utils.dart';
+import '../../loading_screen.dart';
+import '../member.dart';
 
 class MembersScreen extends StatefulWidget {
   String userId;

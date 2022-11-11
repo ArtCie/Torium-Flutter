@@ -17,8 +17,6 @@ class PatchDevice extends RequestSender {
   }
 
   void fetch(){
-    print(headers);
-    print(body);
     patch(path, headers, body);
   }
 }

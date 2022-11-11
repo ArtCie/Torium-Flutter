@@ -233,7 +233,6 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
    inviteUsersToGroup(int groupId) {
     for(User user in usersToAdd){
       PostGroupMembers(user.userId, groupId).fetch().then((result) {
-        print(result);
       });
     }
   }

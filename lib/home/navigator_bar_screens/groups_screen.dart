@@ -8,6 +8,7 @@ import '../../authentication/amplify.dart';
 import '../../utils.dart';
 import '../group_screens/add_group/add_group_screen.dart';
 import '../group_screens/add_group/group.dart';
+import '../group_screens/edit_group_screen/edit_group_screen.dart';
 import '../group_screens/group_details_screen/group_details_screen.dart';
 import '../loading_screen.dart';
 
@@ -93,7 +94,18 @@ class _GroupsState extends State<GroupsScreen>{
                             IconData(0xf6fb, fontFamily: 'MaterialIcons',
                                 matchTextDirection: true)
                         ),
-                        onPressed: () { },
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EditGroupScreen(
+                                userId: userId!,
+                                groupId: userGroups[index].groupId,
+                                groupName: userGroups[index].name,
+                                groupDescription: userGroups[index].description,
+                                status: userGroups[index].status)
+                            ),
+                          ).then(onGoBack);
+                        },
                       ),
                     ),
                     Visibility(
