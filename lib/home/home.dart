@@ -160,7 +160,6 @@ class MyHomeState extends State<Home> {
   }
 
   BottomNavigationBarItem buildNotificationNavigationBar(){
-    print(numberOfNotifications);
     return BottomNavigationBarItem(
       icon: hasNotificationsToShow ? Badge(
         badgeContent: Text(numberOfNotifications.toString()),

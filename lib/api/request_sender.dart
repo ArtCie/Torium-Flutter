@@ -44,7 +44,7 @@ class RequestSender{
     return {};
   }
 
-  Future<Map> patch(String path, Map<String, String> requestHeaders, Map<String, String> body) async {
+  Future<Map> patch(String path, Map<String, String> requestHeaders, Map<String, dynamic> body) async {
     try {
       var url = Uri.http(domain, path);
       var bodyParsed = json.encode(body);
@@ -88,16 +88,17 @@ class RequestSender{
     return {};
   }
 
-  Future<Map> postEmpty(String path, Map<String, String> requestHeaders) async {
+  Future<Map> put(String path, Map<String, String> requestHeaders, Map<String, dynamic> body) async {
     try {
       var url = Uri.http(domain, path);
+      var bodyParsed = json.encode(body);
       var headers = addApplicationType(requestHeaders);
 
-      var response = await http.post(
+      var response = await http.put(
           url,
-          headers: headers
+          headers: headers,
+          body: bodyParsed
       );
-      print(response.body);
       if (response.statusCode == 200) {
         return convert.jsonDecode(response.body) as Map<String, dynamic>;
       }

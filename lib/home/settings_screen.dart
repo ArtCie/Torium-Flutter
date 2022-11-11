@@ -37,7 +37,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           newList.add(getSettingTypeByName("Bank", data));
 
           setState(() {
-            print(settingTypes);
             settingTypes = newList;
           });
         });
@@ -77,7 +76,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   ListView getPreferencesWidget() {
-    print(settingTypes);
     return ListView.builder(
       itemCount: settingTypes.length,
       itemBuilder: (_, index) {

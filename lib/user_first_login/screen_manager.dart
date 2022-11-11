@@ -37,8 +37,6 @@ class _ScreenManagerState extends State<ScreenManager> {
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
     widget.userId = (await AmplifyConfigure.getUserId())!;
-    print("TEST");
-    print(widget.userId);
     getUserPreferences().then((data) {
       setState(() {
         checkDeviceToken(data);
@@ -52,7 +50,6 @@ class _ScreenManagerState extends State<ScreenManager> {
               ));
         }
         else {
-          print("LAUNCH");
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => Home(),

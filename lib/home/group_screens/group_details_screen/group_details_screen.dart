@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:torium/home/group_screens/group_details_screen/members_screen/members_screen.dart';
 
 import '../../../api/events/get_user_events.dart';
 import '../../../utils.dart';
 import '../../loading_screen.dart';
 import 'event.dart';
+import 'members_screen.dart';
 
 class GroupDetailsScreen extends StatefulWidget {
   String userId;
@@ -13,7 +13,7 @@ class GroupDetailsScreen extends StatefulWidget {
   String groupName;
   String groupDescription;
   GroupDetailsScreen({super.key, required this.userId, required this.groupId,
-                      required this.groupName, required this.groupDescription});
+    required this.groupName, required this.groupDescription});
 
   @override
   _GroupDetailsScreenState createState() => _GroupDetailsScreenState();
@@ -31,7 +31,7 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
-    await GetUserEvents(widget.userId).fetch().then((result) async {
+    await GetUserEvents(widget.userId, widget.groupId.toString()).fetch().then((result) async {
       setState(() {
         groupEvents = [];
         for (var event in result["data"]) {
@@ -99,7 +99,7 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
               MaterialPageRoute(builder: (context) => MembersScreen(
                   userId: widget.userId,
                   groupId: widget.groupId
-                )
+              )
               ),
             ).then(onGoBack);
           }
@@ -141,10 +141,10 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
               ),
               subtitle: Text(groupEvents[index].description),
               trailing: Text(groupEvents[index].datetime)
-              ),
-              // onTap: () {
-              // }
-          );
+          ),
+          // onTap: () {
+          // }
+        );
       },
     );
   }

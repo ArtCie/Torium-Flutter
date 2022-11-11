@@ -108,9 +108,6 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
         style: OutlinedButton.styleFrom(backgroundColor: Colors.teal[300]),
         onPressed: () {
           if (_formKey.currentState!.validate()) {
-            print(widget.userId);
-            print(groupNameController.text);
-            print(groupDescriptionController.text);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => AddUsersToGroupScreen(userId: widget.userId,

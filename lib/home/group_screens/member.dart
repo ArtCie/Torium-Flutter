@@ -1,7 +1,7 @@
 class Member{
   final int _userId;
   final String _email;
-  final String _status;
+  String _status;
 
   Member(this._userId, this._email, this._status);
 
@@ -10,4 +10,6 @@ class Member{
   String get email => _email;
 
   String get status => _status;
+
+  set status(newStatus) => _status = newStatus;
 }
