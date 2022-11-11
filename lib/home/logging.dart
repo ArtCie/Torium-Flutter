@@ -37,14 +37,8 @@ class _LoggingState extends State<Logging> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Image.asset(
-            'assets/yellow.png',
-            fit: BoxFit.cover,
-            height: 50,
-            width: 50,
-          ),
-          const Text(
+        title: Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
+          Text(
             'Torium',
             style: TextStyle(
                 letterSpacing: 5, fontSize: 20, color: Colors.black87),

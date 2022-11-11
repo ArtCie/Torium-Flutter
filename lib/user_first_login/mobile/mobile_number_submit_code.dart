@@ -30,7 +30,7 @@ class _MobileNumberSubmitCodeState extends State<MobileNumberSubmitCode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultWidgets().get(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(isProfile: false),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(30.0),

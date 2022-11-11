@@ -48,7 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultWidgets().get(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
