@@ -7,7 +7,7 @@ import '../../api/groups/get_user_groups.dart';
 import '../../authentication/amplify.dart';
 import '../../utils.dart';
 import '../group_screens/add_group/add_group_screen.dart';
-import '../group_screens/add_group/group.dart';
+import '../content/group.dart';
 import '../group_screens/edit_group_screen/edit_group_screen.dart';
 import '../group_screens/group_details_screen/group_details_screen.dart';
 import '../loading_screen.dart';

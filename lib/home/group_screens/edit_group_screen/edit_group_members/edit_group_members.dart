@@ -5,7 +5,7 @@ import '../../../../api/groups_members/delete_group_member.dart';
 import '../../../../api/groups_members/patch_user_group_role.dart';
 import '../../../../utils.dart';
 import '../../../loading_screen.dart';
-import '../../member.dart';
+import '../../../content/member.dart';
 import 'add_group_member.dart';
 
 class EditGroupMembersScreen extends StatefulWidget {
@@ -53,7 +53,7 @@ class _EditGroupMembersScreenState extends State<EditGroupMembersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: DefaultWidgets().buildAppBar(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(context: context, isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -4,7 +4,7 @@ import '../../../api/users/get_user_id_by_email.dart';
 import '../../../api/groups/post_user_group.dart';
 import '../../../api/groups_members/post_group_members.dart';
 import '../../../utils.dart';
-import 'user.dart';
+import '../../content/user.dart';
 
 class AddUsersToGroupScreen extends StatefulWidget {
   String userId;
@@ -35,7 +35,7 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset : true,
-      appBar: DefaultWidgets().buildAppBar(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(context: context, isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

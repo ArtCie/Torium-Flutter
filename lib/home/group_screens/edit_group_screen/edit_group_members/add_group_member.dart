@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../api/groups_members/post_group_members.dart';
 import '../../../../api/users/get_user_id_by_email.dart';
 import '../../../../utils.dart';
-import '../../member.dart';
+import '../../../content/member.dart';
 
 class AddGroupMemberScreen extends StatefulWidget {
   int groupId;
@@ -32,7 +32,7 @@ class _AddGroupMemberScreenState extends State<AddGroupMemberScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: DefaultWidgets().buildAppBar(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(context: context, isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

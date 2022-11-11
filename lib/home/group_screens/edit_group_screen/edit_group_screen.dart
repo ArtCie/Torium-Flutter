@@ -5,8 +5,8 @@ import '../../../api/events/get_user_events.dart';
 import '../../../api/groups/put_user_group.dart';
 import '../../../utils.dart';
 import '../../loading_screen.dart';
-import '../group_details_screen/event.dart';
-import 'edit_param.dart';
+import '../../content/event.dart';
+import 'edit_group_param_screen.dart';
 
 class EditGroupScreen extends StatefulWidget {
   String userId;
@@ -59,7 +59,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: DefaultWidgets().buildAppBar(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(context: context, isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -128,7 +128,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
             final result = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => EditParam(
+                  builder: (context) => EditParamScreen(
                       parameterName: "Group name",
                       parameterValue: groupName == null || groupName.isEmpty
                           ? widget.groupName
@@ -165,7 +165,7 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
             final result = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => EditParam(
+                  builder: (context) => EditParamScreen(
                       parameterName: "Group description",
                       parameterValue:
                           groupDescription == null || groupDescription.isEmpty
