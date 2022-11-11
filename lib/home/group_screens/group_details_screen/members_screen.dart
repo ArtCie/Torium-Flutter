@@ -4,7 +4,7 @@ import 'package:torium/api/groups_members/get_group_members.dart';
 
 import '../../../utils.dart';
 import '../../loading_screen.dart';
-import '../member.dart';
+import '../../content/member.dart';
 
 class MembersScreen extends StatefulWidget {
   String userId;
@@ -43,7 +43,7 @@ class _MembersScreenState extends State<MembersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset : true,
-      appBar: DefaultWidgets().buildAppBar(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(context: context, isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

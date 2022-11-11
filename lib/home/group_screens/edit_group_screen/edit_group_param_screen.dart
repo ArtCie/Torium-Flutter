@@ -2,18 +2,18 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils.dart';
-import '../group_details_screen/event.dart';
+import '../../content/event.dart';
 
-class EditParam extends StatefulWidget {
+class EditParamScreen extends StatefulWidget {
   String parameterName;
   String parameterValue;
-  EditParam({super.key, required this.parameterName, required this.parameterValue});
+  EditParamScreen({super.key, required this.parameterName, required this.parameterValue});
 
   @override
-  _EditParamState createState() => _EditParamState();
+  _EditParamScreenState createState() => _EditParamScreenState();
 }
 
-class _EditParamState extends State<EditParam> {
+class _EditParamScreenState extends State<EditParamScreen> {
   List<Event> groupEvents = [];
   final _formKey = GlobalKey<FormState>();
   TextEditingController paramEditController = TextEditingController(text: "");
@@ -31,7 +31,7 @@ class _EditParamState extends State<EditParam> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: DefaultWidgets().buildAppBar(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(context: context, isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

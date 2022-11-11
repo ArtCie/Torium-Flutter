@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../api/events/get_user_events.dart';
 import '../../../utils.dart';
 import '../../loading_screen.dart';
-import 'event.dart';
+import '../../content/event.dart';
 import 'members_screen.dart';
 
 class GroupDetailsScreen extends StatefulWidget {
@@ -47,7 +47,7 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset : true,
-      appBar: DefaultWidgets().buildAppBar(isProfile: false),
+      appBar: DefaultWidgets().buildAppBar(context: context, isProfile: false),
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

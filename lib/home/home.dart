@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:torium/authentication/amplify.dart';
-import 'package:torium/home/settings_screen.dart';
+import 'package:torium/home/events_screens/event_base_screen.dart';
 import 'package:badges/badges.dart';
 
 import '../api/groups/invitations/get_invitations_count.dart';
@@ -24,7 +24,7 @@ class MyHomeState extends State<Home> {
 
   final screens = [
     GroupsScreen(),
-    GroupsScreen(),
+    EventBaseScreen(),
     GroupsScreen(),
     NotificationScreen()
   ];
@@ -57,23 +57,12 @@ class MyHomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultWidgets().buildAppBar(),
+      appBar: DefaultWidgets().buildAppBar(context: context),
       body: screens[_selectedIndex],
       bottomNavigationBar: buildBottomNavigationBar(),
     );
   }
 
-  void redirectAction(String? action){
-    if(action == "Log out"){
-      AmplifyConfigure.logOut();
-    }
-    else{
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => SettingsScreen()),
-      );
-    }
-  }
 
 
   BottomNavigationBar buildBottomNavigationBar() {

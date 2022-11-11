@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'authentication/amplify.dart';
 import 'home/home.dart';
+import 'home/settings_screen.dart';
 
 class DefaultColors {
     static Color? getDefaultColor() {
@@ -10,7 +12,7 @@ class DefaultColors {
 
 
 class DefaultWidgets extends MyHomeState {
-  AppBar buildAppBar({bool isProfile = true}) {
+  AppBar buildAppBar({context, bool isProfile = true}) {
     return AppBar(
       centerTitle: true,
       title: const Text(
@@ -20,39 +22,52 @@ class DefaultWidgets extends MyHomeState {
         textAlign: TextAlign.center,
       ),
       backgroundColor: DefaultColors.getDefaultColor(),
-      actions: <Widget>[getProfileAction(isProfile)],
+      actions: <Widget>[getProfileAction(context, isProfile)],
     );
   }
 
-  Visibility getProfileAction(bool isProfile) {
+  Visibility getProfileAction(context, bool isProfile) {
     return Visibility(
-        visible: isProfile,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+      visible: isProfile,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
 
-          child: PopupMenuButton(
+        child: PopupMenuButton(
             icon: const Icon(
               IconData(0xf522, fontFamily: 'MaterialIcons'),
               color: Colors.white,
               size: 35,
             ),
-              onSelected: (item) {
-                redirectAction(item);
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                const PopupMenuItem(
-                  value: "Settings",
-                  child: Text('Settings'),
-                ),
-                const PopupMenuItem(
-                  value: "Log out",
-                  child: Text('Log out'),
-                ),
-              ]
-          ),
+            onSelected: (item) {
+              redirectAction(context, item);
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+              const PopupMenuItem(
+                value: "Settings",
+                child: Text('Settings'),
+              ),
+              const PopupMenuItem(
+                value: "Log out",
+                child: Text('Log out'),
+              ),
+            ]
         ),
-      );
+      ),
+    );
   }
+
+  void redirectAction(context, String? action){
+    if(action == "Log out"){
+      AmplifyConfigure.logOut();
+    }
+    else{
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SettingsScreen()),
+      );
+    }
+  }
+
 
   static SnackBar getErrorSnackBar() {
     return SnackBar(
