@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:torium/home/events_screens/add_event/add_event_screen.dart';
 
 import '../../../api/groups/get_user_groups.dart';
 import '../../../utils.dart';
@@ -135,7 +136,10 @@ class _ChooseGroupScreenState extends State<ChooseGroupScreen> {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor(opacity: _indexChosen == -1 ? 0.1 : 0.9)),
         onPressed: _indexChosen == -1 ? null: () {
-          print("dalej");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddEventScreen(groupId: userGroups[_indexChosen].groupId)),
+          );
         },
         child: const Text("Continue",
             style: TextStyle(

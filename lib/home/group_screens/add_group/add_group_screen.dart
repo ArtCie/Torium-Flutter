@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../add_user_to_group/add_users_to_group_screen.dart';
-import '../add_user_to_group/add_users_to_group_screen.dart';
 
 import '../../../utils.dart';
 
@@ -36,7 +35,7 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              buildHeader(),
+              DefaultWidgets.buildHeader("Add group"),
               Expanded(
                   child: buildAddGroupWidget()
               ),
@@ -44,21 +43,6 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
         ),
       ),
     );
-  }
-
-  Padding buildHeader() {
-    return Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 30.0, horizontal: 40.0),
-              child: Text(
-                  "Add group",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.grey[800],
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25)
-              ),
-            );
   }
 
   Widget buildAddGroupWidget() {
@@ -105,7 +89,7 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
       height: 70.0,
       width: 250.0,
       child: OutlinedButton(
-        style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor(opacity: 0.2)),
+        style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor()),
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             Navigator.push(
