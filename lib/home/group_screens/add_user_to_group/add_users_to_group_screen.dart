@@ -40,27 +40,12 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              buildHeader(),
+              DefaultWidgets.buildHeader("Great, now invite users"),
               Expanded(
                   child: buildAddUsersToGroupWidget()
               ),
             ]
         ),
-      ),
-    );
-  }
-
-  Padding buildHeader() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 30.0, horizontal: 40.0),
-      child: Text(
-          "Great, now invite users",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Colors.grey[800],
-              fontWeight: FontWeight.bold,
-              fontSize: 25)
       ),
     );
   }
@@ -143,7 +128,7 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
       height: 70.0,
       width: 250.0,
       child: OutlinedButton(
-        style: OutlinedButton.styleFrom(backgroundColor: Colors.teal[300]),
+        style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor()),
         onPressed: () async {
           await insertGroupAndSendInvitations();
 
