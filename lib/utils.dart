@@ -5,8 +5,8 @@ import 'home/home.dart';
 import 'home/settings_screen.dart';
 
 class DefaultColors {
-    static Color? getDefaultColor() {
-      return Colors.blue.shade800;
+    static Color? getDefaultColor({double opacity = 1.0}) {
+      return Colors.blue.shade800.withOpacity(opacity);
     }
 }
 
@@ -85,7 +85,7 @@ class DefaultWidgets extends MyHomeState {
     );
   }
 
-  static Align buildHeader(String text, {double vertical = 30.0, Alignment alignment = Alignment.center}){
+  static Align buildHeader(String text, {double vertical = 30.0, Alignment alignment = Alignment.center, double? fontSize = 25}){
     return Align(
       alignment: alignment,
       child: Padding(
@@ -96,8 +96,23 @@ class DefaultWidgets extends MyHomeState {
             style: TextStyle(
                 color: Colors.grey[800],
                 fontWeight: FontWeight.bold,
-                fontSize: 25)
+                fontSize: fontSize)
         ),
+      ),
+    );
+  }
+
+  static Align buildInfoHeader(String text, {double? fontSize = 14}) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 15, 20, 5),
+        child: Text(text,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+                color: Colors.grey[500],
+                fontWeight: FontWeight.w600,
+                fontSize: fontSize)),
       ),
     );
   }

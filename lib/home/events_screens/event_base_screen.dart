@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:torium/api/events/get_all_events.dart';
 
 import '../../../utils.dart';
@@ -15,6 +16,12 @@ class EventBaseScreen extends StatefulWidget {
 }
 
 class _EventBaseScreenState extends State<EventBaseScreen> {
+  Map<String, String> schedulePeriodMap = {
+    "7 days, 0:00:00": "Weekly",
+    "30 days, 0:00:00": "Monthly",
+    "1 day, 0:00:00": "Daily",
+  };
+  DateTime currentTimestamp = DateTime.now();
   List<EventDetails> userEvents = [];
   String? userId;
   bool isLoaded = false;
@@ -31,7 +38,6 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
       setState(() {
         userEvents = [];
         for (var event in result["data"]) {
-          print(event);
           userEvents.add(EventDetails(
               event["name"],
               event["description"],
@@ -53,18 +59,26 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               buildHeaderWidget(),
-              buildDescription(),
-              buildInfoHeader("Group info"),
-              buildMembersWidget(),
-              buildInfoHeader("Events"),
               Expanded(
-                  child: !isLoaded ? LoadingScreen.getScreen() : buildEvents()),
+                child: SingleChildScrollView(
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                    children: [
+                      DefaultWidgets.buildHeader("Upcoming", fontSize: 16, vertical: 15.0, alignment: Alignment.centerLeft),
+                      getEventsScreen(getEventsFiltered(const Duration(days: 7))),
+                      DefaultWidgets.buildHeader("This month", fontSize: 16, vertical: 15.0, alignment: Alignment.centerLeft),
+                      getEventsScreen(getMonthlyEvents()),
+                      DefaultWidgets.buildHeader("Later", fontSize: 16, vertical: 15.0, alignment: Alignment.centerLeft),
+                      getEventsScreen(getLaterEvents()),
+                    ]
+                  ),
+                ),
+              )
             ]),
       ),
     );
@@ -102,71 +116,78 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
     );
   }
 
-  Padding buildDescription() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text("aaa",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.grey[800],
-                fontWeight: FontWeight.normal,
-                fontSize: 13)),
-      ),
-    );
-  }
-
-  Card buildMembersWidget() {
-    return Card(
-      child: ListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
-          title: const Text("Group members"),
-          trailing: const Icon(IconData(0xf8f5,
-              fontFamily: 'MaterialIcons', matchTextDirection: true)),
-          onTap: () {
-          }),
-    );
-  }
-
   onGoBack(dynamic value) {
     didChangeDependencies();
   }
 
-  static Align buildInfoHeader(String text) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 15, 20, 5),
-        child: Text(text,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.grey[500],
-                fontWeight: FontWeight.w600,
-                fontSize: 14)),
-      ),
-    );
-  }
-
-  Widget buildEvents() {
+  Widget buildEvents(List<EventDetails> events) {
     return ListView.builder(
-      itemCount: userEvents.length,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: events.length,
       itemBuilder: (_, index) {
         return Card(
-          child: ListTile(
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
-              title: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text(userEvents[index].name),
+          child:
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildUpperCard(events, index),
+                  const SizedBox(height: 10),
+                  buildLowerCard(events, index)
+                ]
               ),
-              subtitle: Text(userEvents[index].description),
-              trailing: Text(userEvents[index].datetime)),
+            )
           // onTap: () {
           // }
         );
       },
     );
+  }
+
+  Row buildLowerCard(List<EventDetails> events, int index) {
+    return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(DateFormat('dd MMM yyyy').format(events[index].datetime)),
+                    const Text('.'),
+                    Text(events[index].groupName),
+                    const Text('.'),
+                    Text(schedulePeriodMap[events[index].schedulePeriod]!),
+                  ]
+                );
+  }
+
+  Row buildUpperCard(List<EventDetails> events, int index) {
+    return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(events[index].name),
+                    events[index].isBudget ? Text("${events[index].budget} PLN") : const Text("")
+                  ]
+                );
+  }
+
+  getEventsScreen(List<EventDetails> eventsFiltered) {
+    return !isLoaded ? LoadingScreen.getScreen() : buildEvents(eventsFiltered);
+  }
+
+  List<EventDetails> getEventsFiltered(Duration duration){
+    return userEvents.where((event) => event.datetime.compareTo(currentTimestamp.add(duration)) < 0).toList();
+  }
+
+  List<EventDetails> getMonthlyEvents() {
+    List<EventDetails> weeklyEvents = getEventsFiltered(const Duration(days: 7));
+    List<EventDetails> monthlyEvents = getEventsFiltered(const Duration(days: 31));
+    monthlyEvents.removeWhere((element) => weeklyEvents.contains(element));
+    return monthlyEvents;
+  }
+
+  List<EventDetails> getLaterEvents() {
+    List<EventDetails> copyEventDetails = List.from(userEvents);
+    List<EventDetails> monthlyEvents = getEventsFiltered(const Duration(days: 31));
+    copyEventDetails.removeWhere((element) => monthlyEvents.contains(element));
+    return copyEventDetails;
   }
 }

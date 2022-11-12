@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 class EventDetails{
   late String _name;
   late String _description;
-  late String _datetime;
+  late DateTime _datetime;
   late var _budget;
   late int _groupId;
   late String _groupName;
@@ -17,8 +17,8 @@ class EventDetails{
       List<dynamic> users) {
     _name = name;
     _description = description;
-    var datetimeParsed = DateTime.parse(datetime);
-    _datetime = DateFormat('dd MMM yyyy h:mm a').format(datetimeParsed);
+    _datetime = DateTime.parse(datetime);
+    // _datetime = DateFormat('dd MMM yyyy h:mm a').format(datetimeParsed);
     _budget = budget;
     _groupId = groupId;
     _groupName = groupName;
@@ -32,7 +32,7 @@ class EventDetails{
 
   String get description => _description;
 
-  String get datetime => _datetime;
+  DateTime get datetime => _datetime;
 
   get budget => _budget;
 

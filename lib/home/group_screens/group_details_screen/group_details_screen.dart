@@ -54,9 +54,9 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
             children: <Widget>[
               DefaultWidgets.buildHeader(widget.groupName, vertical: 15.0, alignment: Alignment.centerLeft),
               buildDescription(),
-              buildInfoHeader("Group info"),
+              DefaultWidgets.buildInfoHeader("Group info"),
               buildMembersWidget(),
-              buildInfoHeader("Events"),
+              DefaultWidgets.buildInfoHeader("Events"),
               Expanded(
                   child: !isLoaded ? LoadingScreen.getScreen() : buildEvents()
               ),
@@ -109,23 +109,6 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
 
   onGoBack(dynamic value) {
     didChangeDependencies();
-  }
-
-  static Align buildInfoHeader(String text){
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 15, 20, 5),
-        child: Text(
-            text,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                color: Colors.grey[500],
-                fontWeight: FontWeight.w600,
-                fontSize: 14)
-        ),
-      ),
-    );
   }
 
   Widget buildEvents() {

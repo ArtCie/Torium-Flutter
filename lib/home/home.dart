@@ -74,8 +74,8 @@ class MyHomeState extends State<Home> {
         buildNotificationNavigationBar(),
       ],
       backgroundColor: DefaultColors.getDefaultColor(),
-      selectedItemColor: Colors.black38,
-      unselectedItemColor: Colors.black87,
+      selectedItemColor: DefaultColors.getDefaultColor(opacity: 0.6),
+      unselectedItemColor: DefaultColors.getDefaultColor(),
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
     );

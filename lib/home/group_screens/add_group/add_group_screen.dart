@@ -105,7 +105,7 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
       height: 70.0,
       width: 250.0,
       child: OutlinedButton(
-        style: OutlinedButton.styleFrom(backgroundColor: Colors.teal[300]),
+        style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor(opacity: 0.2)),
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             Navigator.push(
