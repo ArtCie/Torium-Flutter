@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:torium/authentication/amplify.dart';
-import 'package:torium/home/events_screens/event_base_screen.dart';
+import 'package:torium/home/navigator_bar_screens/event_base_screen.dart';
 import 'package:badges/badges.dart';
 
 import '../api/groups/invitations/get_invitations_count.dart';
