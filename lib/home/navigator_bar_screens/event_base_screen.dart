@@ -5,6 +5,7 @@ import 'package:torium/api/events/get_all_events.dart';
 import '../../../utils.dart';
 import '../../authentication/amplify.dart';
 import '../content/event_details.dart';
+import '../events_screens/add_event/choose_group_screen.dart';
 import '../loading_screen.dart';
 
 class EventBaseScreen extends StatefulWidget {
@@ -102,15 +103,10 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
     return IconButton(
       icon: const Icon(Icons.add_rounded, size: 35),
       onPressed: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => AddGroupMemberScreen(
-        //           groupId: widget.groupId,
-        //           userId: widget.userId,
-        //           groupMembers: groupMembers
-        //       )),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChooseGroupScreen(userId: userId!)),
+        ).then(onGoBack);
         setState(() {});
       },
     );
