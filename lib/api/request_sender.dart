@@ -22,7 +22,7 @@ class RequestSender{
       return {};
     }
 
-  Future<Map> post(String path, Map<String, String> requestHeaders, Map<String, String> body) async {
+  Future<Map> post(String path, Map<String, String> requestHeaders, Map<String, dynamic> body) async {
     try {
       var url = Uri.http(domain, path);
       var bodyParsed = json.encode(body);
