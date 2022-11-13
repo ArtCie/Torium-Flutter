@@ -122,7 +122,7 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
     return null;
   }
 
-
+ 
   Widget buildContinueButton() {
     return SizedBox(
       height: 70.0,

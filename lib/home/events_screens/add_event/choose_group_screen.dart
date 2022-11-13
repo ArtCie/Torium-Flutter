@@ -138,7 +138,7 @@ class _ChooseGroupScreenState extends State<ChooseGroupScreen> {
         onPressed: _indexChosen == -1 ? null: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddEventScreen(groupId: userGroups[_indexChosen].groupId)),
+            MaterialPageRoute(builder: (context) => AddEventScreen(groupId: userGroups[_indexChosen].groupId, userId: widget.userId)),
           );
         },
         child: const Text("Continue",
