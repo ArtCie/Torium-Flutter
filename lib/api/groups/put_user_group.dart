@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import '../request_sender.dart';
 
 class PutUserGroup extends RequestSender {

@@ -102,16 +102,16 @@ class DefaultWidgets extends MyHomeState {
     );
   }
 
-  static Align buildInfoHeader(String text, {double? fontSize = 14}) {
+  static Align buildInfoHeader(String text, {double? fontSize = 14, double top = 15, fontWeight = FontWeight.w600}) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 15, 20, 5),
+        padding: EdgeInsets.fromLTRB(20, top, 20, 5),
         child: Text(text,
             textAlign: TextAlign.left,
             style: TextStyle(
                 color: Colors.grey[500],
-                fontWeight: FontWeight.w600,
+                fontWeight: fontWeight,
                 fontSize: fontSize)),
       ),
     );
