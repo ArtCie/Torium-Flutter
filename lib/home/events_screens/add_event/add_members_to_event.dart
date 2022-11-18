@@ -124,8 +124,9 @@ class _AddMembersToEventState extends State<AddMembersToEvent> {
       width: 250.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor()),
-        onPressed: () {
-          collectDataAndSaveEvent();
+        onPressed: () async {
+          await collectDataAndSaveEvent();
+          if(!mounted) return;
           Navigator.of(context).popUntil((route) => route.isFirst);
         },
         child: const Text("Submit event!",
@@ -139,22 +140,22 @@ class _AddMembersToEventState extends State<AddMembersToEvent> {
     );
   }
 
-  void collectDataAndSaveEvent() {
+  Future<void> collectDataAndSaveEvent() async {
     List<int> chosenMembers = [int.parse(widget.userId)];
     for(MemberOverload member in groupMembers){
       if(member.isChosen == true){
         chosenMembers.add(member.userId);
       }
-      PostEvent(widget.groupId,
-          widget.hasBudget,
-          widget.budget,
-          widget.eventDescription,
-          '${DateFormat('yyyy-MM-dd kk:mm:ss').format(widget.eventTimestamp)}.00',
-          widget.reminderType.toLowerCase(),
-          widget.schedulePeriodMap[widget.schedulePeriod],
-          chosenMembers,
-          widget.eventName).fetch();
     }
+    await PostEvent(widget.groupId,
+        widget.hasBudget,
+        widget.budget,
+        widget.eventDescription,
+        '${DateFormat('yyyy-MM-dd kk:mm:ss').format(widget.eventTimestamp)}.00',
+        widget.reminderType.toLowerCase(),
+        widget.schedulePeriodMap[widget.schedulePeriod],
+        chosenMembers,
+        widget.eventName).fetch();
   }
 
 }

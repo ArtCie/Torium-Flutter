@@ -28,7 +28,7 @@ class _EventMembersScreenState extends State<EventMembersScreen> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              DefaultWidgets.buildHeader("Event Members", vertical: 15.0, alignment: Alignment.centerLeft),
+              DefaultWidgets.buildHeader("Event Members", bottom: 15.0, alignment: Alignment.centerLeft),
               Expanded(
                   child: buildMembers()
               ),

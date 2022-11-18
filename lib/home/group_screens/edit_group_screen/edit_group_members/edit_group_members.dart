@@ -74,7 +74,7 @@ class _EditGroupMembersScreenState extends State<EditGroupMembersScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           DefaultWidgets.buildHeader("Group Members",
-              vertical: 15.0, alignment: Alignment.centerLeft),
+              bottom: 15.0, alignment: Alignment.centerLeft),
           buildAddIconButton()
         ],
       ),

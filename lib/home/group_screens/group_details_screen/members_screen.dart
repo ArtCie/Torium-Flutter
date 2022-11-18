@@ -48,7 +48,7 @@ class _MembersScreenState extends State<MembersScreen> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              DefaultWidgets.buildHeader("Group Members", vertical: 15.0, alignment: Alignment.centerLeft),
+              DefaultWidgets.buildHeader("Group Members", bottom: 15.0, alignment: Alignment.centerLeft),
               Expanded(
                   child: !isLoaded ? LoadingScreen.getScreen() : buildMembers()
               ),
