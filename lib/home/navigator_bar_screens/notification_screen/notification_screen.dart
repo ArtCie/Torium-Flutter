@@ -108,7 +108,6 @@ class _NotificationsState extends State<NotificationScreen>{
 
   void sendAnswer(String answer, int groupId) {
     PatchStatusGroupMembers(userId, groupId, answer).fetch().then((result) {
-      // print(result);
     });
   }
 

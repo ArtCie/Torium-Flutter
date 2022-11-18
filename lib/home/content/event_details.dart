@@ -1,6 +1,9 @@
 import 'package:intl/intl.dart';
 
+import 'member.dart';
+
 class EventDetails{
+  late int _id;
   late String _name;
   late String _description;
   late DateTime _datetime;
@@ -10,11 +13,12 @@ class EventDetails{
   late bool _isBudget;
   late String _reminder;
   late String _schedulePeriod;
-  late List<dynamic> _users;
+  late List<Member> _users;
 
-  EventDetails(String name, String description, String datetime, var budget,
+  EventDetails(int id, String name, String description, String datetime, var budget,
       int groupId, String groupName, bool isBudget, String reminder, String schedulePeriod,
-      List<dynamic> users) {
+      List<Member> users) {
+    _id = id;
     _name = name;
     _description = description;
     _datetime = DateTime.parse(datetime);
@@ -27,6 +31,8 @@ class EventDetails{
     _schedulePeriod = schedulePeriod;
     _users = users;
   }
+
+  int get id => _id;
 
   String get name => _name;
 

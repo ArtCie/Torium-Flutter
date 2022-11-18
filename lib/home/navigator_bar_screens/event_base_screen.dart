@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:torium/api/events/get_all_events.dart';
 
 import '../../../utils.dart';
 import '../../authentication/amplify.dart';
 import '../content/event_details.dart';
+import '../content/member.dart';
 import '../events_screens/add_event/choose_group_screen.dart';
+import '../events_screens/event_details_screen/event_details_screen.dart';
 import '../loading_screen.dart';
 
 class EventBaseScreen extends StatefulWidget {
@@ -40,6 +43,7 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
         userEvents = [];
         for (var event in result["data"]) {
           userEvents.add(EventDetails(
+              event["id"],
               event["name"],
               event["description"],
               event["event_timestamp"],
@@ -49,12 +53,20 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
               event["is_budget"],
               event["reminder"],
               event["schedule_period"],
-              event["users"]));
+              parseMembers(event["users"])));
         }
         isLoaded = true;
       });
     });
     super.didChangeDependencies();
+  }
+
+  List<Member> parseMembers(users){
+    List<Member> result = [];
+    for (Map user in users) {
+        result.add(Member(user["id"], user["email"], ""));
+    }
+    return result;
   }
 
   @override
@@ -122,21 +134,26 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
       shrinkWrap: true,
       itemCount: events.length,
       itemBuilder: (_, index) {
-        return Card(
-          child:
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildUpperCard(events, index),
-                  const SizedBox(height: 10),
-                  buildLowerCard(events, index)
-                ]
+        return GestureDetector(
+          child: Card(
+            child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buildUpperCard(events, index),
+                    const SizedBox(height: 10),
+                    buildLowerCard(events, index)
+                  ],
+                ),
               ),
-            )
-          // onTap: () {
-          // }
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EventDetailsScreen(userId: userId!, event: events[index])),
+            ).then(onGoBack);
+          }
         );
       },
     );
@@ -166,7 +183,7 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
   }
 
   getEventsScreen(List<EventDetails> eventsFiltered) {
-    return !isLoaded ? LoadingScreen.getScreen() : buildEvents(eventsFiltered);
+    return !isLoaded ? getLoadingScreen() : buildEvents(eventsFiltered);
   }
 
   List<EventDetails> getEventsFiltered(Duration duration){
@@ -185,5 +202,14 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
     List<EventDetails> monthlyEvents = getEventsFiltered(const Duration(days: 31));
     copyEventDetails.removeWhere((element) => monthlyEvents.contains(element));
     return copyEventDetails;
+  }
+
+  Center getLoadingScreen() {
+      return Center(
+          child: SpinKitCubeGrid(
+              color: DefaultColors.getDefaultColor(),
+              size: 60
+          )
+      );
   }
 }
