@@ -53,14 +53,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(
+              const Padding(
+                padding: EdgeInsets.symmetric(
                     vertical: 30.0, horizontal: 40.0),
                 child: Text(
                     "User profile",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Colors.grey[800],
                         fontWeight: FontWeight.bold,
                         fontSize: 25)
                 ),
@@ -71,7 +70,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ]
         ),
       ),
-      backgroundColor: Colors.grey[300],
     );
   }
 
@@ -80,9 +78,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
       itemCount: settingTypes.length,
       itemBuilder: (_, index) {
         return Card(
+          elevation: 4,
+          shadowColor: Colors.black12,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Container(
             alignment: Alignment.centerLeft,
-            height: 120,
+            height: 100,
             child: ListTile(
                 leading: settingTypes[index].icon,
                 title: Text(settingTypes[index].name),

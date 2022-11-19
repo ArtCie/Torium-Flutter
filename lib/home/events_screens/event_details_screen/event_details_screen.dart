@@ -121,9 +121,15 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   }
 
   Padding buildEmptyCard() {
-    return const Padding(
-      padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
-      child: Card(),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+      child: Card(
+        elevation: 4,
+        shadowColor: Colors.black12,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
     );
   }
 
@@ -303,6 +309,11 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
       itemCount: eventComments.length,
       itemBuilder: (_, index) {
         return Card(
+          elevation: 4,
+          shadowColor: Colors.black12,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 18.0),

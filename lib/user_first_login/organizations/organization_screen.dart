@@ -53,7 +53,7 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
       width: 150.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: (text == "Skip" || (text == "Continue" && widget.currentId != null)) ? Colors.teal[200] : Colors.grey, //<-- SEE HERE
+          backgroundColor: (text == "Skip" || (text == "Continue" && widget.currentId != null)) ? DefaultColors.getDefaultColor() : Colors.white,
         ),
         onPressed: text == "Skip" || (text == "Continue" && widget.currentId != null) ? () {
           if(widget.currentId != null){
@@ -71,8 +71,8 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
 
         } : null ,
         child: Text(text,
-            style: TextStyle(
-              color: Colors.grey[800],
+            style: const TextStyle(
+              color: Colors.white,
               fontSize: 15,
             )
         ),
@@ -108,7 +108,6 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
               ]),
         ),
       ),
-      backgroundColor: Colors.grey[300],
     );
   }
 
@@ -129,7 +128,7 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
       padding: const EdgeInsets.all(2.0),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: (widget.currentId == organization.id) ? Colors.teal[100]: Colors.grey[300], //<-- SEE HERE
+          backgroundColor: (widget.currentId == organization.id) ? DefaultColors.getDefaultColor(opacity: 0.2): Colors.white,
         ),
         onPressed: () {
           setState(() {
