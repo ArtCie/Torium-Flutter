@@ -48,7 +48,7 @@ class _AddGroupMemberScreenState extends State<AddGroupMemberScreen> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
       child: DefaultWidgets.buildHeader("Add Member",
-          vertical: 15.0, alignment: Alignment.centerLeft),
+          bottom: 15.0, alignment: Alignment.centerLeft),
     );
   }
 

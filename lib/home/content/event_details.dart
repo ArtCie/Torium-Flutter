@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 import 'member.dart';
 
 class EventDetails{
@@ -13,11 +11,12 @@ class EventDetails{
   late bool _isBudget;
   late String _reminder;
   late String _schedulePeriod;
+  late String _status;
   late List<Member> _users;
 
   EventDetails(int id, String name, String description, String datetime, var budget,
       int groupId, String groupName, bool isBudget, String reminder, String schedulePeriod,
-      List<Member> users) {
+      String status, List<Member> users) {
     _id = id;
     _name = name;
     _description = description;
@@ -29,6 +28,7 @@ class EventDetails{
     _isBudget = isBudget;
     _reminder = reminder;
     _schedulePeriod = schedulePeriod;
+    _status = status;
     _users = users;
   }
 
@@ -52,5 +52,45 @@ class EventDetails{
 
   String get schedulePeriod => _schedulePeriod;
 
-  List<dynamic> get users => _users;
+  String get status => _status;
+
+  List<Member> get users => _users;
+
+  set name(String newName) {
+    _name = newName;
+  }
+
+  set description(String newDescription) {
+    _description = newDescription;
+  }
+
+  set isBudget(bool newIsBudget) {
+    _isBudget = newIsBudget;
+  }
+
+  set budget(var newBudget) {
+    _budget = newBudget;
+  }
+
+  set groupName(String newName) {
+    _groupName = newName;
+  }
+
+  set reminder(String newReminder) {
+    _reminder = newReminder;
+  }
+
+  set schedulePeriod(String newSchedulePeriod) {
+    _schedulePeriod = newSchedulePeriod;
+  }
+
+  set datetime(DateTime newDatetime) {
+    _datetime = newDatetime;
+  }
+
+  set users(List<Member> newUsers) {
+    _users = newUsers;
+  }
+
+
 }

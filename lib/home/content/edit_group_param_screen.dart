@@ -1,13 +1,14 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../utils.dart';
-import '../../content/event.dart';
+import '../../utils.dart';
+import 'event.dart';
 
 class EditParamScreen extends StatefulWidget {
   String parameterName;
   String parameterValue;
-  EditParamScreen({super.key, required this.parameterName, required this.parameterValue});
+  dynamic validType = "";
+  EditParamScreen({super.key, required this.parameterName, required this.parameterValue, this.validType});
 
   @override
   _EditParamScreenState createState() => _EditParamScreenState();
@@ -78,11 +79,20 @@ class _EditParamScreenState extends State<EditParamScreen> {
           if (value == null || value.isEmpty) {
             return 'Please enter some text';
           }
+          if(widget.validType == "number" && !isNumeric(value)){
+            return 'Value must be a number!';
+          }
           return null;
         }
     );
   }
 
+  bool isNumeric(String s) {
+    if (s == null) {
+      return false;
+    }
+    return double.tryParse(s) != null;
+  }
   Widget buildContinueButton() {
     return SizedBox(
       height: 70.0,
@@ -90,7 +100,9 @@ class _EditParamScreenState extends State<EditParamScreen> {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(backgroundColor: Colors.teal[300]),
         onPressed: () {
+          FocusManager.instance.primaryFocus?.unfocus();
           if (_formKey.currentState!.validate()) {
+            print(paramEditController.text);
             Navigator.pop(context, paramEditController.text);
           }
         },

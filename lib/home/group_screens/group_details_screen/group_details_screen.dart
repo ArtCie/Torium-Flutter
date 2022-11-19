@@ -52,7 +52,7 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              DefaultWidgets.buildHeader(widget.groupName, vertical: 15.0, alignment: Alignment.centerLeft),
+              DefaultWidgets.buildHeader(widget.groupName, bottom: 15.0, alignment: Alignment.centerLeft),
               buildDescription(),
               DefaultWidgets.buildInfoHeader("Group info"),
               buildMembersWidget(),

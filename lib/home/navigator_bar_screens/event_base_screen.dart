@@ -47,12 +47,13 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
               event["name"],
               event["description"],
               event["event_timestamp"],
-              event["budget"],
+              event["is_budget"] ? event["budget"]: -1,
               event["group_id"],
               event["group_name"],
               event["is_budget"],
               event["reminder"],
               event["schedule_period"],
+              event["status"],
               parseMembers(event["users"])));
         }
         isLoaded = true;
@@ -82,11 +83,11 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
                     children: [
-                      DefaultWidgets.buildHeader("Upcoming", fontSize: 16, vertical: 15.0, alignment: Alignment.centerLeft),
+                      DefaultWidgets.buildHeader("Upcoming", fontSize: 16, bottom: 15.0, alignment: Alignment.centerLeft),
                       getEventsScreen(getEventsFiltered(const Duration(days: 7))),
-                      DefaultWidgets.buildHeader("This month", fontSize: 16, vertical: 15.0, alignment: Alignment.centerLeft),
+                      DefaultWidgets.buildHeader("This month", fontSize: 16, bottom: 15.0, alignment: Alignment.centerLeft),
                       getEventsScreen(getMonthlyEvents()),
-                      DefaultWidgets.buildHeader("Later", fontSize: 16, vertical: 15.0, alignment: Alignment.centerLeft),
+                      DefaultWidgets.buildHeader("Later", fontSize: 16, bottom: 15.0, alignment: Alignment.centerLeft),
                       getEventsScreen(getLaterEvents()),
                     ]
                   ),
@@ -104,7 +105,7 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           DefaultWidgets.buildHeader("Events",
-              vertical: 15.0, alignment: Alignment.centerLeft),
+              bottom: 15.0, alignment: Alignment.centerLeft),
           buildAddIconButton()
         ],
       ),
@@ -148,11 +149,15 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
                 ),
               ),
           ),
-          onTap: () {
-            Navigator.push(
+          onTap: () async {
+            final result = await Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => EventDetailsScreen(userId: userId!, event: events[index])),
-            ).then(onGoBack);
+            );
+            if(result == 'delete'){
+              events.removeAt(index);
+            }
+            onGoBack(result);
           }
         );
       },

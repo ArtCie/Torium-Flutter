@@ -6,7 +6,7 @@ import '../../../api/groups/put_user_group.dart';
 import '../../../utils.dart';
 import '../../loading_screen.dart';
 import '../../content/event.dart';
-import 'edit_group_param_screen.dart';
+import '../../content/edit_group_param_screen.dart';
 
 class EditGroupScreen extends StatefulWidget {
   String userId;

@@ -85,11 +85,12 @@ class DefaultWidgets extends MyHomeState {
     );
   }
 
-  static Align buildHeader(String text, {double vertical = 30.0, Alignment alignment = Alignment.center, double? fontSize = 25}){
+  static Align buildHeader(String text, {double bottom = 30.0, Alignment alignment = Alignment.center, double? fontSize = 25, double top = 20.0}){
     return Align(
       alignment: alignment,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: vertical, horizontal: 20.0),
+        // padding: EdgeInsets.symmetric(vertical: vertical, horizontal: 20.0),
+        padding: EdgeInsets.fromLTRB(20, top, 20, bottom),
         child: Text(
             text,
             textAlign: TextAlign.center,
@@ -114,6 +115,17 @@ class DefaultWidgets extends MyHomeState {
                 fontWeight: fontWeight,
                 fontSize: fontSize)),
       ),
+    );
+  }
+
+  static Card buildDefaultCard(title, {trailing}){
+    return Card(
+      child: ListTile(
+          contentPadding:
+          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 14.0),
+          title: title,
+          trailing: trailing,
+          onTap: null),
     );
   }
 }

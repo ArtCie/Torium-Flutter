@@ -1,40 +1,26 @@
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:torium/home/events_screens/add_event/member_overload.dart';
 
-import '../../../api/events/post_event.dart';
 import '../../../api/groups_members/get_group_members.dart';
 import '../../../utils.dart';
+import '../../content/member.dart';
 import '../../loading_screen.dart';
+import 'package:collection/collection.dart';
 
 
-class AddMembersToEvent extends StatefulWidget {
-  Map<String, String> schedulePeriodMap = {
-    "Daily": "1 day",
-    "Weekly": "1 week",
-    "Monthly": "1 month"
-  };
+class EditMembersScreen extends StatefulWidget {
   int groupId;
   String userId;
-  String eventName;
-  String eventDescription;
-  bool hasBudget;
-  dynamic budget;
-  String reminderType;
-  String schedulePeriod;
-  DateTime eventTimestamp;
-  AddMembersToEvent({super.key, required this.userId, required this.groupId,
-                      required this.eventName, required this.eventDescription,
-                      required this.hasBudget, required this.budget,
-                      required this.reminderType, required this.schedulePeriod,
-                      required this.eventTimestamp});
+  String userMail;
+  List<Member> alreadySubscribedUsers;
+  EditMembersScreen({super.key, required this.userId, required this.groupId, required this.userMail, required this.alreadySubscribedUsers});
 
   @override
-  _AddMembersToEventState createState() => _AddMembersToEventState();
+  _EditMembersScreenState createState() => _EditMembersScreenState();
 }
 
-class _AddMembersToEventState extends State<AddMembersToEvent> {
+class _EditMembersScreenState extends State<EditMembersScreen> {
   List<MemberOverload> groupMembers = [];
   bool isLoaded = false;
 
@@ -50,7 +36,10 @@ class _AddMembersToEventState extends State<AddMembersToEvent> {
         groupMembers = [];
         for (var event in result["data"]) {
           groupMembers.add(MemberOverload(event["user_id"],
-              event["email"], event["status"]));
+              event["email"],
+              event["status"],
+              isChosen: widget.alreadySubscribedUsers.firstWhereOrNull((a) => a.userId == event["user_id"]) != null)
+          );
         }
         isLoaded = true;
       });
@@ -69,14 +58,14 @@ class _AddMembersToEventState extends State<AddMembersToEvent> {
             children: <Widget>[
               DefaultWidgets.buildHeader("Add members to event"),
               Expanded(child:
-                  !isLoaded ? LoadingScreen.getScreen() :
-                  Column(
-                    children: [
-                       buildMembers(),
-                      const SizedBox(height: 20),
-                      buildContinueButton()
-                    ],
-                  )
+              !isLoaded ? LoadingScreen.getScreen() :
+              Column(
+                children: [
+                  buildMembers(),
+                  const SizedBox(height: 20),
+                  buildContinueButton()
+                ],
+              )
               )
             ]
         ),
@@ -125,11 +114,11 @@ class _AddMembersToEventState extends State<AddMembersToEvent> {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor()),
         onPressed: () async {
-          await collectDataAndSaveEvent();
-          if(!mounted) return;
-          Navigator.of(context).popUntil((route) => route.isFirst);
+          collectDataAndSaveEvent().then((result) {
+            Navigator.pop(context, result);
+          });
         },
-        child: const Text("Submit event!",
+        child: const Text("Save",
             style: TextStyle(
               color: Colors.white,
               fontSize: 15,
@@ -140,22 +129,14 @@ class _AddMembersToEventState extends State<AddMembersToEvent> {
     );
   }
 
-  Future<void> collectDataAndSaveEvent() async {
-    List<int> chosenMembers = [int.parse(widget.userId)];
+  Future<List<Member>> collectDataAndSaveEvent() async {
+    List<Member> chosenMembers = [Member(int.parse(widget.userId), widget.userMail, 'moderator')];
     for(MemberOverload member in groupMembers){
       if(member.isChosen == true){
-        chosenMembers.add(member.userId);
+        chosenMembers.add(Member(member.userId, member.email, member.status));
       }
     }
-    await PostEvent(widget.groupId,
-        widget.hasBudget,
-        widget.budget,
-        widget.eventDescription,
-        '${DateFormat('yyyy-MM-dd kk:mm:ss').format(widget.eventTimestamp)}.00',
-        widget.reminderType.toLowerCase(),
-        widget.schedulePeriodMap[widget.schedulePeriod],
-        chosenMembers,
-        widget.eventName).fetch();
+    return chosenMembers;
   }
 
 }
