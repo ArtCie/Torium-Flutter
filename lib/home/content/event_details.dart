@@ -54,5 +54,43 @@ class EventDetails{
 
   String get status => _status;
 
-  List<dynamic> get users => _users;
+  List<Member> get users => _users;
+
+  set name(String newName) {
+    _name = newName;
+  }
+
+  set description(String newDescription) {
+    _description = newDescription;
+  }
+
+  set isBudget(bool newIsBudget) {
+    _isBudget = newIsBudget;
+  }
+
+  set budget(var newBudget) {
+    _budget = newBudget;
+  }
+
+  set groupName(String newName) {
+    _groupName = newName;
+  }
+
+  set reminder(String newReminder) {
+    _reminder = newReminder;
+  }
+
+  set schedulePeriod(String newSchedulePeriod) {
+    _schedulePeriod = newSchedulePeriod;
+  }
+
+  set datetime(DateTime newDatetime) {
+    _datetime = newDatetime;
+  }
+
+  set users(List<Member> newUsers) {
+    _users = newUsers;
+  }
+
+
 }

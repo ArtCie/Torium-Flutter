@@ -117,4 +117,15 @@ class DefaultWidgets extends MyHomeState {
       ),
     );
   }
+
+  static Card buildDefaultCard(title, {trailing}){
+    return Card(
+      child: ListTile(
+          contentPadding:
+          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 14.0),
+          title: title,
+          trailing: trailing,
+          onTap: null),
+    );
+  }
 }

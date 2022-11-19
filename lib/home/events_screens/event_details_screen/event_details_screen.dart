@@ -13,6 +13,7 @@ import '../../../utils.dart';
 import '../../content/comment.dart';
 import '../../content/event_details.dart';
 import '../../content/member.dart';
+import '../edit_event_screens/edit_event_screen.dart';
 import 'event_members_screen.dart';
 
 class EventDetailsScreen extends StatefulWidget {
@@ -29,7 +30,14 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   TextEditingController commentController = TextEditingController();
   TextEditingController commentUpdateController = TextEditingController();
   List<Comment> eventComments = [];
+  String userMail = "";
   bool isLoaded = false;
+  Map<String, String> schedulePeriodMap = {
+    "7 days, 0:00:00": "Weekly",
+    "30 days, 0:00:00": "Monthly",
+    "1 day, 0:00:00": "Daily",
+  };
+
 
   @override
   void initState() {
@@ -74,7 +82,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                       fontSize: 14,
                       fontWeight: FontWeight.w600),
                   const SizedBox(height: 10),
-                  DefaultWidgets.buildInfoHeader(widget.event.groupName,
+                  DefaultWidgets.buildInfoHeader("Group - ${widget.event.groupName}",
                       top: 0, fontSize: 14, fontWeight: FontWeight.w100),
                   const SizedBox(height: 10),
                   widget.event.isBudget
@@ -88,6 +96,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   const SizedBox(height: 10),
                   DefaultWidgets.buildInfoHeader("Invited", fontSize: 15),
                   buildMembersWidget(),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(child: buildInfoWidget("Reminder type", Text(widget.event.reminder))),
+                        Expanded(child: buildInfoWidget("Schedule period", Text(schedulePeriodMap[widget.event.schedulePeriod]!)))
+                      ]
+                  ),
                   DefaultWidgets.buildInfoHeader("Comments"),
                   !isLoaded ? getLoadingScreen() : buildComments(),
                   buildEmptyCard()
@@ -121,7 +136,20 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   ),
                   widget.event.status != 'standard' ? IconButton(icon: const Icon(Icons.edit_rounded, ),
                       constraints: const BoxConstraints(),
-                      onPressed: () {}) : const Text(""),
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  EditEventScreen(userId: widget.userId, event: widget.event, userMail: userMail)),
+                        ).then((result) {
+                          if(result != null) {
+                            setState(() {
+                              widget.event = result;
+                            });
+                          }
+                        });
+                      }) : const Text(""),
                   const SizedBox(width: 10),
                   widget.event.status == 'admin' ? IconButton(icon: const Icon(Icons.delete_forever_rounded),
                       constraints: const BoxConstraints(),
@@ -157,28 +185,36 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
       });
   }
 
-  Card buildMembersWidget() {
-    return Card(
-      child: ListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
-          title: Row(
-            children: const [
-              Icon(Icons.groups_rounded),
-              SizedBox(width: 10),
-              Text("Members"),
-            ],
-          ),
-          trailing: const Icon(IconData(0xf8f5,
-              fontFamily: 'MaterialIcons', matchTextDirection: true)),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      EventMembersScreen(eventMembers: widget.event.users)),
-            ).then(onGoBack);
-          }),
+  Padding buildMembersWidget() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      child: Card(
+        elevation: 4,  // Change this
+        shadowColor: Colors.black12,  // Change this
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ListTile(
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 14.0),
+            title: Row(
+              children: const [
+                Icon(Icons.groups_rounded),
+                SizedBox(width: 10),
+                Text("Members"),
+              ],
+            ),
+            trailing: const Icon(IconData(0xf8f5,
+                fontFamily: 'MaterialIcons', matchTextDirection: true)),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        EventMembersScreen(eventMembers: widget.event.users)),
+              ).then(onGoBack);
+            }),
+      ),
     );
   }
 
@@ -191,6 +227,11 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
       children: [
         DefaultWidgets.buildInfoHeader(widgetHeader, fontSize: 15),
         Card(
+          elevation: 4,  // Change this
+          shadowColor: Colors.black12,  // Change this
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 14.0),
@@ -407,6 +448,9 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   getEmailByUserId(index) {
     for (Member user in widget.event.users) {
       if (user.userId.toString() == eventComments[index].userId) {
+        if(user.userId.toString() == widget.userId){
+          userMail = user.email;
+        }
         return Text(user.email,
             style: TextStyle(
                 color: Colors.grey[500],
