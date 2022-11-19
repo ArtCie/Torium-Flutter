@@ -6,6 +6,7 @@ import 'package:badges/badges.dart';
 import '../api/groups/invitations/get_invitations_count.dart';
 
 import '../utils.dart';
+import 'navigator_bar_screens/calendar_screen.dart';
 import 'navigator_bar_screens/groups_screen.dart';
 import 'navigator_bar_screens/notification_screen/notification_screen.dart';
 
@@ -25,7 +26,7 @@ class MyHomeState extends State<Home> {
   final screens = [
     GroupsScreen(),
     EventBaseScreen(),
-    GroupsScreen(),
+    CalendarScreen(),
     NotificationScreen()
   ];
 
