@@ -9,6 +9,7 @@ import '../../../api/event_comments/delete_event_comment.dart';
 import '../../../api/event_comments/get_event_comments.dart';
 import '../../../api/event_comments/post_event_comment.dart';
 import '../../../api/event_comments/put_event_comment.dart';
+import '../../../api/events/post_notify_all.dart';
 import '../../../utils.dart';
 import '../../content/comment.dart';
 import '../../content/event_details.dart';
@@ -96,6 +97,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   const SizedBox(height: 10),
                   DefaultWidgets.buildInfoHeader("Invited", fontSize: 15),
                   buildMembersWidget(),
+                  DefaultWidgets.buildInfoHeader("Notify", fontSize: 15),
+                  widget.event.status == 'admin' ? buildNotifyAllWidget() : const SizedBox(height: 0),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -254,6 +257,43 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   getEventTrailing() {
     return const Icon(IconData(0xf8f5,
         fontFamily: 'MaterialIcons', matchTextDirection: true));
+  }
+
+  buildNotifyAllWidget() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      child: Card(
+        elevation: 4,  // Change this
+        shadowColor: Colors.black12,  // Change this
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ListTile(
+            contentPadding:
+            const EdgeInsets.symmetric(vertical: 10.0, horizontal: 14.0),
+            title: Row(
+              children: const [
+                Icon(Icons.notification_important_rounded),
+                SizedBox(width: 10),
+                Text("Notify all users"),
+              ],
+            ),
+            trailing: const Icon(IconData(0xf8f5,
+                fontFamily: 'MaterialIcons', matchTextDirection: true)),
+            onTap: () async {
+              await PostNotifyAll(widget.userId, widget.event.id).fetch().then((result) {
+                if (result["status"]["code"] != 200) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text("You can send 1 notification per 24 hours")
+                      )
+                  );
+                  return;
+                }
+              });
+            }),
+      ),
+    );
   }
 
   ListView buildComments() {
