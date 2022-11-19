@@ -104,6 +104,11 @@ class _EditGroupMembersScreenState extends State<EditGroupMembersScreen> {
       itemCount: groupMembers.length,
       itemBuilder: (_, index) {
         return Card(
+          elevation: 4,
+          shadowColor: Colors.black12,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),

@@ -143,6 +143,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Iterable<Widget> buildSelectedEvents(BuildContext context) {
     return _selectedEvents.map((event) => GestureDetector(
         child: Card(
+          elevation: 4,
+          shadowColor: Colors.black12,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
             child: Column(

@@ -159,8 +159,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
 
   Card buildEditWidget(methodUpdate, fieldName, value, {double vertical = 10.0, validType = ""}) {
     return Card(
-      elevation: 4,  // Change this
-      shadowColor: Colors.black12,  // Change this
+      elevation: 4,
+      shadowColor: Colors.black12,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

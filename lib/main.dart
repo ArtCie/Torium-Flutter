@@ -1,14 +1,13 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:torium/user_first_login/screen_manager.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 
 import 'Palette.dart';
 import 'authentication/amplify.dart';
+import 'home/home.dart';
 import 'user_first_login/preferences_screen.dart';
 import 'user_first_login/mobile/mobile_number_init.dart';
-import 'home/logging.dart';
 import 'firebase/firebase_handler.dart';
 
 
@@ -48,16 +47,14 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Palette.kToDark,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -73,13 +70,12 @@ class _MyHomePageState extends State<MyHomePage> {
           darkTheme: customDarkTheme,
           themeMode: ThemeMode.system,
           builder: Authenticator.builder(),
-          home: const Scaffold(
+          home: Scaffold(
             body: Center(
-              child: Logging(),
+              child: Home(),
             ),
           ),
           routes: <String, WidgetBuilder> {
-            '/first_login': (BuildContext context) => ScreenManager(),
             '/preferences': (BuildContext context) => PreferencesScreen(),
             '/mobile_number_init': (BuildContext context) => MobileNumberInit()
           },

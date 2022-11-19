@@ -38,7 +38,7 @@ class _ScreenManagerState extends State<PreferencesScreen> {
       width: 200.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: (widget.value == text) ? Colors.teal[100]: Colors.grey[300], //<-- SEE HERE
+          backgroundColor: (widget.value == text) ? DefaultColors.getDefaultColor(): Colors.grey[50],
         ),
         onPressed: () {
           setState(() {
@@ -48,7 +48,7 @@ class _ScreenManagerState extends State<PreferencesScreen> {
         child: Text(
           text,
           style: TextStyle(
-              color: Colors.grey[800],
+              color: (widget.value == text) ? Colors.white : Colors.grey[800],
               fontSize: 15,
               fontWeight: (widget.value == text) ? FontWeight.bold : FontWeight.normal,
           )
@@ -63,7 +63,7 @@ class _ScreenManagerState extends State<PreferencesScreen> {
       width: 250.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: Colors.teal[300]
+          backgroundColor: DefaultColors.getDefaultColor()
         ),
         onPressed: () {
             String valueUpper = widget.value.toUpperCase();
@@ -130,7 +130,6 @@ class _ScreenManagerState extends State<PreferencesScreen> {
             ]
         ),
       ),
-      backgroundColor: Colors.grey[300],
     );
   }
 }

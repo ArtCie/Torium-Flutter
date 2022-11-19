@@ -86,6 +86,11 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
 
   Card buildMembersWidget() {
     return Card(
+      elevation: 4,
+      shadowColor: Colors.black12,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: ListTile(
           contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
           title: const Text("Group members"),
@@ -116,6 +121,11 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
       itemCount: groupEvents.length,
       itemBuilder: (_, index) {
         return Card(
+          elevation: 4,
+          shadowColor: Colors.black12,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: ListTile(
               contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
               title: Padding(

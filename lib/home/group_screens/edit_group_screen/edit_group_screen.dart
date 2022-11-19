@@ -95,6 +95,11 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
 
   Card buildMembersWidget() {
     return Card(
+      elevation: 4,
+      shadowColor: Colors.black12,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: ListTile(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
@@ -116,6 +121,11 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
 
   Card buildGroupWidget() {
     return Card(
+      elevation: 4,
+      shadowColor: Colors.black12,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: ListTile(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
@@ -153,6 +163,11 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
 
   Card buildDescriptionWidget() {
     return Card(
+      elevation: 4,
+      shadowColor: Colors.black12,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: ListTile(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
@@ -198,6 +213,11 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
       itemCount: groupEvents.length,
       itemBuilder: (_, index) {
         return Card(
+          elevation: 4,
+          shadowColor: Colors.black12,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
