@@ -206,12 +206,13 @@ class _AddEventScreenState extends State<AddEventScreen> {
             child: Row(
               children: [
                 const Icon(
-                    IconData(0xf06bb, fontFamily: 'MaterialIcons')
+                    IconData(0xf06bb, fontFamily: 'MaterialIcons'),
+                    color: Color.fromRGBO(35, 54, 92, 0.5)
                 ),
                 const SizedBox(width: 10),
                 Text(isDateChosen == false ? "Select event datetime" : DateFormat('yyyy-MM-dd hh:mm').format(selectedDate)),
                 Spacer(),
-                const Icon(Icons.arrow_drop_down)
+                const Icon(Icons.arrow_drop_down, color: Color.fromRGBO(35, 54, 92, 0.5))
               ]
             ),
           );

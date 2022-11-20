@@ -89,7 +89,7 @@ class _MobileNumberInitState extends State<MobileNumberInit> {
       width: 250.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(backgroundColor: isValid ?
-        Colors.teal[300] : Colors.grey[400]),
+        DefaultColors.getDefaultColor() : Colors.grey[400]),
         onPressed: isValid ? () {
           Navigator.push(
             context,

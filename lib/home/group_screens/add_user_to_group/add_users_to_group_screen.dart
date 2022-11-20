@@ -79,7 +79,8 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
   IconButton buildIconButton() {
     return IconButton(
                   icon: const Icon(
-                      IconData(0xe047, fontFamily: 'MaterialIcons')
+                      IconData(0xe047, fontFamily: 'MaterialIcons'),
+                      color: Color.fromRGBO(35, 54, 92, 0.6),
                   ),
                   tooltip: 'Add',
                   onPressed: () {
@@ -197,7 +198,8 @@ class _AddUsersToGroupScreenState extends State<AddUsersToGroupScreen> {
                       IconButton(
                         icon: const Icon(
                             IconData(0xf645, fontFamily: 'MaterialIcons',
-                                matchTextDirection: true)
+                                matchTextDirection: true),
+                            color: Color.fromRGBO(35, 54, 92, 0.5)
                         ),
                         onPressed: () {
                           setState(() {

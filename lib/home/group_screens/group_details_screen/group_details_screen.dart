@@ -96,7 +96,8 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
           title: const Text("Group members"),
           trailing: const Icon(
               IconData(0xf8f5, fontFamily: 'MaterialIcons',
-                  matchTextDirection: true)
+                  matchTextDirection: true),
+              color: Color.fromRGBO(35, 54, 92, 0.5)
           ),
           onTap: () {
             Navigator.push(

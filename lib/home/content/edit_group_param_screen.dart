@@ -98,7 +98,7 @@ class _EditParamScreenState extends State<EditParamScreen> {
       height: 70.0,
       width: 250.0,
       child: OutlinedButton(
-        style: OutlinedButton.styleFrom(backgroundColor: Colors.teal[300]),
+        style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor()),
         onPressed: () {
           FocusManager.instance.primaryFocus?.unfocus();
           if (_formKey.currentState!.validate()) {

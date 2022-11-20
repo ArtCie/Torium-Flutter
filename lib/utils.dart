@@ -14,14 +14,15 @@ class DefaultColors {
 class DefaultWidgets extends MyHomeState {
   AppBar buildAppBar({context, bool isProfile = true}) {
     return AppBar(
-      centerTitle: true,
-      title: const Text(
-        'Torium',
-        style: TextStyle(
-            letterSpacing: 5, fontSize: 20, color: Colors.black87),
-        textAlign: TextAlign.center,
+      iconTheme: IconThemeData(
+        color: DefaultColors.getDefaultColor(), //change your color here
       ),
-      backgroundColor: DefaultColors.getDefaultColor(),
+      elevation: 0,
+      centerTitle: false,
+      title: Image.asset('assets/logo.png', fit: BoxFit.cover,
+          height: 30,
+          width: 30),
+      backgroundColor: Colors.grey[50],
       actions: <Widget>[getProfileAction(context, isProfile)],
     );
   }
@@ -33,9 +34,9 @@ class DefaultWidgets extends MyHomeState {
         padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
 
         child: PopupMenuButton(
-            icon: const Icon(
-              IconData(0xf522, fontFamily: 'MaterialIcons'),
-              color: Colors.white,
+            icon: Icon(
+              const IconData(0xf522, fontFamily: 'MaterialIcons'),
+              color: DefaultColors.getDefaultColor(),
               size: 35,
             ),
             onSelected: (item) {
@@ -95,7 +96,6 @@ class DefaultWidgets extends MyHomeState {
             text,
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.grey[800],
                 fontWeight: FontWeight.bold,
                 fontSize: fontSize)
         ),
@@ -111,7 +111,7 @@ class DefaultWidgets extends MyHomeState {
         child: Text(text,
             textAlign: TextAlign.left,
             style: TextStyle(
-                color: Colors.grey[500],
+                color: Color.fromRGBO(35, 54, 92, 0.6),
                 fontWeight: fontWeight,
                 fontSize: fontSize)),
       ),

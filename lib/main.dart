@@ -66,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Authenticator(
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: customLightTheme,
           darkTheme: customDarkTheme,
           themeMode: ThemeMode.system,
@@ -94,11 +95,16 @@ class _MyHomePageState extends State<MyHomePage> {
     // tab bar indicator color
     indicatorColor: Palette.kToDark,
     textTheme: const TextTheme(
-      // text theme of the header on each step
       headline6: TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: 24,
+        color: Colors.white,
       ),
+      headlineLarge: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
+      headline1: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
+      headline2: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
+      bodyText2: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
+      subtitle1: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
     ),
     // theme of the form fields for each step
     inputDecorationTheme: InputDecorationTheme(
@@ -125,18 +131,22 @@ class _MyHomePageState extends State<MyHomePage> {
 // dark theme
   ThemeData customDarkTheme = ThemeData(
     fontFamily: 'Poppins',
-    colorScheme: ColorScheme.fromSwatch(
-      brightness: Brightness.dark,
-      primarySwatch: Palette.kToDark,
-    ),
-    indicatorColor: Palette.kToDark,
     textTheme: const TextTheme(
       headline6: TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: 24,
         color: Colors.white,
       ),
+      headline1: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
+      headline2: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
+      bodyText2: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
+      subtitle1: TextStyle(color: Color.fromRGBO(25, 44, 80, 1)),
     ),
+    colorScheme: ColorScheme.fromSwatch(
+      brightness: Brightness.dark,
+      primarySwatch: Palette.kToDark,
+    ),
+    indicatorColor: Palette.kToDark,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(16),
       floatingLabelBehavior: FloatingLabelBehavior.never,

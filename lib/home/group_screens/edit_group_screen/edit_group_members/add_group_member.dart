@@ -104,7 +104,7 @@ class _AddGroupMemberScreenState extends State<AddGroupMemberScreen> {
       height: 70.0,
       width: 250.0,
       child: OutlinedButton(
-        style: OutlinedButton.styleFrom(backgroundColor: Colors.teal[300]),
+        style: OutlinedButton.styleFrom(backgroundColor: DefaultColors.getDefaultColor()),
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             checkIfUserExist(userEmailController.text);

@@ -94,7 +94,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                 child: DefaultWidgets.buildHeader("Edit event",
                     bottom: 0.0, top: 0.0, alignment: Alignment.centerLeft)
             ),
-            IconButton(icon: const Icon(Icons.check_rounded),
+            IconButton(icon: const Icon(Icons.check_rounded, color: Color.fromRGBO(35, 54, 92, 0.5)),
                 constraints: const BoxConstraints(),
                 onPressed: () {
                   PutEvent(widget.event.id, widget.userId, widget.event.isBudget, widget.event.budget,
@@ -168,7 +168,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
           contentPadding: EdgeInsets.symmetric(vertical: vertical, horizontal: 14.0),
           title: Text(value),
           trailing: const Icon(IconData(0xf8f5,
-              fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              fontFamily: 'MaterialIcons', matchTextDirection: true),
+              color: Color.fromRGBO(35, 54, 92, 0.5)),
           onTap: () async {
             final result = await Navigator.push(
               context,
@@ -243,12 +244,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
       child: Row(
           children: [
             const Icon(
-                IconData(0xf06bb, fontFamily: 'MaterialIcons')
+                IconData(0xf06bb, fontFamily: 'MaterialIcons'),
+                color: Color.fromRGBO(35, 54, 92, 0.5)
             ),
             const SizedBox(width: 10),
             Text(DateFormat('yyyy-MM-dd hh:mm').format(widget.event.datetime)),
             Spacer(),
-            const Icon(Icons.arrow_drop_down)
+            const Icon(Icons.arrow_drop_down, color: Color.fromRGBO(35, 54, 92, 0.5))
           ]
       ),
     );
@@ -296,13 +298,15 @@ class _EditEventScreenState extends State<EditEventScreen> {
           const EdgeInsets.symmetric(vertical: 10.0, horizontal: 14.0),
           title: Row(
             children: const [
-              Icon(Icons.groups_rounded),
+              Icon(Icons.groups_rounded, color: Color.fromRGBO(35, 54, 92, 0.5)),
               SizedBox(width: 10),
               Text("Members"),
             ],
           ),
           trailing: const Icon(IconData(0xf8f5,
-              fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              fontFamily: 'MaterialIcons', matchTextDirection: true,
+          ),
+              color: Color.fromRGBO(35, 54, 92, 0.5)),
           onTap: () async {
             final result = await Navigator.push(
               context,
