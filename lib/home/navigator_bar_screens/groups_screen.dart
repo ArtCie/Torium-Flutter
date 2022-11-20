@@ -51,7 +51,7 @@ class _GroupsState extends State<GroupsScreen>{
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              DefaultWidgets.buildHeader("Groups"),
+              DefaultWidgets.buildHeader("Groups", alignment: Alignment.centerLeft),
               Expanded(child:
               !isLoaded ? LoadingScreen.getScreen() : buildGroupsScreen()
               ),
@@ -97,7 +97,8 @@ class _GroupsState extends State<GroupsScreen>{
                       child: IconButton(
                         icon: const Icon(
                             IconData(0xf6fb, fontFamily: 'MaterialIcons',
-                                matchTextDirection: true)
+                                matchTextDirection: true),
+                          color: Color.fromRGBO(35, 54, 92, 0.5),
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -118,7 +119,8 @@ class _GroupsState extends State<GroupsScreen>{
                       child: IconButton(
                         icon: const Icon(
                             IconData(0xf645, fontFamily: 'MaterialIcons',
-                                matchTextDirection: true)
+                                matchTextDirection: true),
+                          color: Color.fromRGBO(35, 54, 92, 0.5),
                         ),
                         onPressed: () {
                           QuickAlert.show(

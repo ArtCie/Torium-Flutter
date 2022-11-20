@@ -89,14 +89,15 @@ class MyHomeState extends State<Home> {
 
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
+
       items: <BottomNavigationBarItem>[
         buildBottomNavigationBarItem('Groups', 0xe2eb),
         buildBottomNavigationBarItem('Events', 0xe23e),
         buildBottomNavigationBarItem('Calendar', 0xf06c8),
         buildNotificationNavigationBar(),
       ],
-      backgroundColor: DefaultColors.getDefaultColor(),
-      selectedItemColor: DefaultColors.getDefaultColor(opacity: 0.6),
+      backgroundColor: Colors.white,
+      selectedItemColor: const Color.fromRGBO(35, 54, 92, 1),
       unselectedItemColor: DefaultColors.getDefaultColor(),
       currentIndex: _selectedIndex,
       onTap: _onItemTapped,
@@ -106,7 +107,8 @@ class MyHomeState extends State<Home> {
   BottomNavigationBarItem buildBottomNavigationBarItem(String text, var icon){
     return BottomNavigationBarItem(
         icon: Icon(
-            IconData(icon, fontFamily: 'MaterialIcons')
+            IconData(icon, fontFamily: 'MaterialIcons'),
+          color: const Color.fromRGBO(35, 54, 92, 0.5)
         ),
         label: text
     );
@@ -126,10 +128,12 @@ class MyHomeState extends State<Home> {
       icon: hasNotificationsToShow ? Badge(
         badgeContent: Text(numberOfNotifications.toString()),
         child: const Icon(
-                IconData(0xf0027, fontFamily: 'MaterialIcons')
+                IconData(0xf0027, fontFamily: 'MaterialIcons'),
+            color: Color.fromRGBO(35, 54, 92, 0.5)
             ),
       ) : const Icon(
-          IconData(0xf0027, fontFamily: 'MaterialIcons')
+          IconData(0xf0027, fontFamily: 'MaterialIcons'),
+          color: Color.fromRGBO(35, 54, 92, 0.5)
       ),
       label: 'Notifications'
     );

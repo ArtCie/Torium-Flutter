@@ -62,7 +62,7 @@ class _MobileNumberSubmitCodeState extends State<MobileNumberSubmitCode> {
       width: 250.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(backgroundColor: _code?.length == 6 ?
-        Colors.teal[300] : Colors.grey[400]),
+        DefaultColors.getDefaultColor() : Colors.grey[400]),
         onPressed: _code?.length == 6 ? () {
             _checkCode();
         } : null,
@@ -83,7 +83,7 @@ class _MobileNumberSubmitCodeState extends State<MobileNumberSubmitCode> {
       keyboardType: TextInputType.number,
       builder: CodeInputBuilders.rectangle(
           border: const Border(),
-          color: (Colors.teal[100])!,
+          color: (DefaultColors.getDefaultColor())!,
           textStyle: const TextStyle(
               color: Colors.black, fontSize: 30
           )

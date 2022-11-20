@@ -115,6 +115,7 @@ class _EventBaseScreenState extends State<EventBaseScreen> {
   IconButton buildAddIconButton() {
     return IconButton(
       icon: const Icon(Icons.add_rounded, size: 35),
+      color: const Color.fromRGBO(35, 54, 92, 0.5),
       onPressed: () {
         Navigator.push(
           context,

@@ -83,7 +83,7 @@ class _EditGroupMembersScreenState extends State<EditGroupMembersScreen> {
 
   IconButton buildAddIconButton() {
     return IconButton(
-      icon: const Icon(Icons.add_rounded, size: 35),
+      icon: const Icon(Icons.add_rounded, size: 35, color: Color.fromRGBO(35, 54, 92, 0.5)),
       onPressed: () {
         Navigator.push(
           context,
@@ -135,6 +135,7 @@ class _EditGroupMembersScreenState extends State<EditGroupMembersScreen> {
       child: PopupMenuButton(
           icon: const Icon(
             IconData(0xf8dc, fontFamily: 'MaterialIcons'),
+            color: Color.fromRGBO(35, 54, 92, 0.5),
             size: 35,
           ),
           onSelected: (item) {

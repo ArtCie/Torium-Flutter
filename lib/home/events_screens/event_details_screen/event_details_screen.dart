@@ -143,7 +143,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                       child: DefaultWidgets.buildHeader(widget.event.name,
                           bottom: 0.0, top: 0.0, alignment: Alignment.centerLeft)
                   ),
-                  widget.event.status != 'standard' ? IconButton(icon: const Icon(Icons.edit_rounded, ),
+                  widget.event.status != 'standard' ? IconButton(icon: const Icon(Icons.edit_rounded, color: Color.fromRGBO(35, 54, 92, 0.5)),
                       constraints: const BoxConstraints(),
                       onPressed: () async {
                         await Navigator.push(
@@ -160,7 +160,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         });
                       }) : const Text(""),
                   const SizedBox(width: 10),
-                  widget.event.status == 'admin' ? IconButton(icon: const Icon(Icons.delete_forever_rounded),
+                  widget.event.status == 'admin' ? IconButton(icon: const Icon(Icons.delete_forever_rounded, color: Color.fromRGBO(35, 54, 92, 0.5)),
                       constraints: const BoxConstraints(),
                       onPressed: () {
                         QuickAlert.show(
@@ -208,13 +208,14 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 const EdgeInsets.symmetric(vertical: 10.0, horizontal: 14.0),
             title: Row(
               children: const [
-                Icon(Icons.groups_rounded),
+                Icon(Icons.groups_rounded, color: Color.fromRGBO(35, 54, 92, 0.5)),
                 SizedBox(width: 10),
                 Text("Members"),
               ],
             ),
             trailing: const Icon(IconData(0xf8f5,
-                fontFamily: 'MaterialIcons', matchTextDirection: true)),
+                fontFamily: 'MaterialIcons', matchTextDirection: true),
+                color: Color.fromRGBO(35, 54, 92, 0.5)),
             onTap: () {
               Navigator.push(
                 context,
@@ -254,7 +255,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
   getEventTitle() {
     return Row(children: const [
-      Icon(IconData(0xf7c8, fontFamily: 'MaterialIcons')),
+      Icon(IconData(0xf7c8, fontFamily: 'MaterialIcons'), color: Color.fromRGBO(35, 54, 92, 0.5)),
       SizedBox(width: 10),
       Text('Members')
     ]);
@@ -262,7 +263,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
   getEventTrailing() {
     return const Icon(IconData(0xf8f5,
-        fontFamily: 'MaterialIcons', matchTextDirection: true));
+        fontFamily: 'MaterialIcons', matchTextDirection: true), color: Color.fromRGBO(35, 54, 92, 0.5));
   }
 
   buildNotifyAllWidget() {
@@ -279,13 +280,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
             const EdgeInsets.symmetric(vertical: 10.0, horizontal: 14.0),
             title: Row(
               children: const [
-                Icon(Icons.notification_important_rounded),
+                Icon(Icons.notification_important_rounded, color: Color.fromRGBO(35, 54, 92, 0.5)),
                 SizedBox(width: 10),
                 Text("Notify all users"),
               ],
             ),
             trailing: const Icon(IconData(0xf8f5,
-                fontFamily: 'MaterialIcons', matchTextDirection: true)),
+                fontFamily: 'MaterialIcons', matchTextDirection: true), color: Color.fromRGBO(35, 54, 92, 0.5)),
             onTap: () async {
               await PostNotifyAll(widget.userId, widget.event.id).fetch().then((result) {
                 if (result["status"]["code"] != 200) {
@@ -344,7 +345,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                             IconButton(
                               padding: EdgeInsets.zero,
                               constraints: BoxConstraints(),
-                              icon: const Icon(Icons.edit_rounded),
+                              icon: const Icon(Icons.edit_rounded, color: Color.fromRGBO(35, 54, 92, 0.5)),
                               onPressed: () {
                                 showDialog(
                                   context: context,
@@ -358,7 +359,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                             IconButton(
                               padding: EdgeInsets.zero,
                               constraints: const BoxConstraints(),
-                              icon: const Icon(Icons.delete_forever_rounded),
+                              icon: const Icon(Icons.delete_forever_rounded, color: Color.fromRGBO(35, 54, 92, 0.5)),
                               onPressed: () {
                                 deleteComment(index);
                               },
@@ -466,7 +467,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   return null;
                 }),
             trailing: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios),
+                icon: const Icon(Icons.arrow_forward_ios, color: Color.fromRGBO(35, 54, 92, 0.5)),
                 onPressed: () {
                   postEventComment(commentController.text);
                   commentController.text = "";

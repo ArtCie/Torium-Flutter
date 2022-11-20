@@ -124,13 +124,14 @@ class _ChooseGroupScreenState extends State<ChooseGroupScreen> {
   }
 
   Icon getTrailingIcon(int index) {
-    return _indexChosen == index ? Icon(
-                  const IconData(0xf635, fontFamily: 'MaterialIcons',
+    return _indexChosen == index ? const Icon(
+                  IconData(0xf635, fontFamily: 'MaterialIcons',
                       matchTextDirection: true),
-                    color: DefaultColors.getDefaultColor(),
+                  color: Color.fromRGBO(35, 54, 92, 0.5),
               ) : const Icon(
                   IconData(0xef53, fontFamily: 'MaterialIcons',
-                      matchTextDirection: true)
+                      matchTextDirection: true),
+                  color: Color.fromRGBO(35, 54, 92, 0.5)
               );
   }
 

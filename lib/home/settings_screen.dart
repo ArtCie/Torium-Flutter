@@ -53,17 +53,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: 30.0, horizontal: 40.0),
-                child: Text(
-                    "User profile",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25)
-                ),
-              ),
+              DefaultWidgets.buildHeader("Groups", alignment: Alignment.centerLeft),
               Expanded(child:
               settingTypes.isNotEmpty ? getPreferencesWidget() : LoadingScreen.getScreen()
               ),
@@ -92,7 +82,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 subtitle: Text(settingTypes[index].value),
                 trailing: settingTypes[index].name != "Email" ? const Icon(
                     IconData(0xf8f5, fontFamily: 'MaterialIcons',
-                        matchTextDirection: true)
+                        matchTextDirection: true),
+                    color: Color.fromRGBO(35, 54, 92, 0.5)
                 ) : null,
                 onTap: settingTypes[index].name != "Email" ? () {
                     Navigator.push(
@@ -121,16 +112,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case "Email":
         return const Icon(
           IconData(0xf705, fontFamily: 'MaterialIcons'),
+          color: Color.fromRGBO(35, 54, 92, 0.5),
           size: 35,
         );
       case "Notifications Preferences":
         return const Icon(
           IconData(0xe44f, fontFamily: 'MaterialIcons'),
+          color: Color.fromRGBO(35, 54, 92, 0.5),
           size: 35,
         );
       default:
         return const Icon(
           IconData(0xf58f, fontFamily: 'MaterialIcons'),
+          color: Color.fromRGBO(35, 54, 92, 0.5),
           size: 35,
         );
     }

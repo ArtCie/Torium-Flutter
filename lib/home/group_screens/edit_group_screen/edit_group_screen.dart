@@ -105,7 +105,8 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
               const EdgeInsets.symmetric(vertical: 20.0, horizontal: 14.0),
           title: const Text("Group members"),
           trailing: const Icon(IconData(0xf8f5,
-              fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              fontFamily: 'MaterialIcons', matchTextDirection: true),
+              color: Color.fromRGBO(35, 54, 92, 0.5)),
           onTap: () {
             Navigator.push(
               context,
@@ -133,7 +134,8 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
               ? widget.groupName
               : groupName),
           trailing: const Icon(IconData(0xf8f5,
-              fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              fontFamily: 'MaterialIcons', matchTextDirection: true),
+              color: Color.fromRGBO(35, 54, 92, 0.5)),
           onTap: () async {
             final result = await Navigator.push(
               context,
@@ -175,7 +177,8 @@ class _EditGroupScreenState extends State<EditGroupScreen> {
               ? widget.groupDescription
               : groupDescription),
           trailing: const Icon(IconData(0xf8f5,
-              fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              fontFamily: 'MaterialIcons', matchTextDirection: true),
+              color: Color.fromRGBO(35, 54, 92, 0.5)),
           onTap: () async {
             final result = await Navigator.push(
               context,
