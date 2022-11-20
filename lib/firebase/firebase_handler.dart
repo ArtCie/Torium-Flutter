@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class FirebaseHandler {
@@ -49,6 +50,13 @@ Future<void> setupFlutterNotifications() async {
       AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
+  await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails()
+  .then((value){
+   if( value != null && value.didNotificationLaunchApp){
+       print(value);
+     }
+   });
+
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
@@ -88,8 +96,12 @@ Future<void> setupInteractedMessage() async {
   FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
 }
 
-void _handleMessage(RemoteMessage message) {
-  print("test");
+Future<void> _handleMessage(RemoteMessage message) async {
+  String forwardLink = message.data["forward_link"];
+  if(forwardLink != "None"){
+    final Uri url = Uri.parse(forwardLink);
+      await launchUrl(url);
+  }
 }
 
 
