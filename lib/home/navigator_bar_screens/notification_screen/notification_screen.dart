@@ -45,7 +45,7 @@ class _NotificationsState extends State<NotificationScreen>{
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              DefaultWidgets.buildHeader("Notifications"),
+              DefaultWidgets.buildHeader("Notifications", alignment: Alignment.centerLeft),
               Expanded(child:
               isLoaded == false ? LoadingScreen.getScreen() : buildNotificationScreen()
               ),
