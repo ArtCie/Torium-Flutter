@@ -159,6 +159,8 @@ class MyHomeState extends State<Home> {
   Future<void> checkDeviceToken(Map data) async {
     final prefs = await SharedPreferences.getInstance();
     final String? deviceToken = prefs.getString('device_token');
+    print(deviceToken);
+    print(data["data"]["device_token"]);
     if(data["data"]["device_token"] != deviceToken){
       PatchDevice(userId, deviceToken).fetch();
     }

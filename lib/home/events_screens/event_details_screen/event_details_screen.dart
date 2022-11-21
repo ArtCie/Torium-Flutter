@@ -456,9 +456,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   hintText: "Add comment",
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                   filled: true,
-                  fillColor: Colors.grey[300],
+                  fillColor: Colors.grey[100],
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {

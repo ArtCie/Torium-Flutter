@@ -70,7 +70,6 @@ class _EditParamScreenState extends State<EditParamScreen> {
         controller: paramEditController,
         decoration: const InputDecoration(
             contentPadding: EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-            border: OutlineInputBorder(),
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             filled: true,
             fillColor: Colors.white

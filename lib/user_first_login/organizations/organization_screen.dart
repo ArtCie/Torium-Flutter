@@ -53,7 +53,7 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
       width: 150.0,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          backgroundColor: (text == "Skip" || (text == "Continue" && widget.currentId != null)) ? DefaultColors.getDefaultColor() : Colors.white,
+          backgroundColor: (text == "Skip" || (text == "Continue" && widget.currentId != null)) ? DefaultColors.getDefaultColor() : Colors.grey,
         ),
         onPressed: text == "Skip" || (text == "Continue" && widget.currentId != null) ? () {
           if(widget.currentId != null){
@@ -88,11 +88,10 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
           padding: const EdgeInsets.all(30.0),
           child: Column(
               children: <Widget>[
-                Text(
+                const Text(
                   "Choose your bank",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.grey[800],
                       fontWeight: FontWeight.bold,
                       fontSize: 30),
                 ),

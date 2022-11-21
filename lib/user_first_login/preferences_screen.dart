@@ -86,7 +86,16 @@ class _ScreenManagerState extends State<PreferencesScreen> {
                 }
                 break;
               case "PUSH":
-                break;
+                PatchPreferences(widget.userId, "PUSH").fetch();
+                if(widget.input == "settings"){
+                  Navigator.pop(context);
+                }
+                else{
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => OrganizationScreen(widget.userId),
+                      ));
+                }
             }
         },
         child: const Text(
