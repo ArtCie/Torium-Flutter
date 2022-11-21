@@ -96,7 +96,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
             labelText: name,
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-            border: const OutlineInputBorder(),
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             filled: true,
             fillColor: Colors.white),
@@ -155,7 +154,6 @@ class _AddEventScreenState extends State<AddEventScreen> {
               labelText: labelText,
               // contentPadding:
               //     const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-              border: const OutlineInputBorder(),
               floatingLabelBehavior: FloatingLabelBehavior.auto,
               filled: true,
               fillColor: Colors.white),
@@ -197,7 +195,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
               backgroundColor: Colors.white,
               shape: (
                   const RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black),
+                    side: BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.all(Radius.circular(4.0))
                 )
               )

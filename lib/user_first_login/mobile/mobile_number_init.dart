@@ -53,7 +53,6 @@ class _MobileNumberInitState extends State<MobileNumberInit> {
               ]),
         ),
       ),
-      backgroundColor: Colors.grey[300],
     );
   }
 

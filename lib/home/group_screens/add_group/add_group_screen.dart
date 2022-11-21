@@ -70,7 +70,6 @@ class _AddGroupScreenState extends State<AddGroupScreen> {
             decoration: InputDecoration(
                 labelText: name,
                 contentPadding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-                border: const OutlineInputBorder(),
                 floatingLabelBehavior: FloatingLabelBehavior.auto,
                 filled: true,
                 fillColor: Colors.white

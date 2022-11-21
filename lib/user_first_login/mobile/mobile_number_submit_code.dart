@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../api/users/patch_update_mobile_phone.dart';
 import 'package:code_input/code_input.dart';
 
+import '../../api/users/post_mobile_phone_update.dart';
 import '../../home/home.dart';
 import '../../utils.dart';
 
@@ -24,7 +25,7 @@ class _MobileNumberSubmitCodeState extends State<MobileNumberSubmitCode> {
   @override
   void initState() {
     super.initState();
-    // PostMobilePhoneUpdate(widget.userId, widget.mobileNumber).fetch(); # TODO włączyć to
+    PostMobilePhoneUpdate(widget.userId, widget.mobileNumber).fetch();
   }
 
   @override
@@ -52,7 +53,6 @@ class _MobileNumberSubmitCodeState extends State<MobileNumberSubmitCode> {
               ]),
         ),
       ),
-      backgroundColor: Colors.grey[300],
     );
   }
 
@@ -85,7 +85,7 @@ class _MobileNumberSubmitCodeState extends State<MobileNumberSubmitCode> {
           border: const Border(),
           color: (DefaultColors.getDefaultColor())!,
           textStyle: const TextStyle(
-              color: Colors.black, fontSize: 30
+              color: Colors.white, fontSize: 30
           )
       ),
       spacing: 8,
