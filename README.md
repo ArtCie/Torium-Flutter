@@ -72,3 +72,26 @@ After providing email + password user is redirected to main page.
 
 <img width="774" alt="Screenshot 2023-01-28 at 09 48 56" src="https://user-images.githubusercontent.com/72509444/215256657-3282971a-20f4-4183-bc68-59dcd264042a.png">
 
+## Application screens
+
+### Registration flow
+
+#### Registration
+<img width="940" alt="Screenshot 2023-01-28 at 09 51 48" src="https://user-images.githubusercontent.com/72509444/215256786-ad554df9-f9f7-4c2f-9ef0-cf600635d134.png">
+
+#### Password validation
+<img width="874" alt="Screenshot 2023-01-28 at 09 53 47" src="https://user-images.githubusercontent.com/72509444/215256875-09413ca4-1d1b-4b25-a64f-9275cff5a4d2.png">
+
+### Login
+#### First login - provide reminder type preference and choose bank
+<img width="883" alt="Screenshot 2023-01-28 at 09 54 23" src="https://user-images.githubusercontent.com/72509444/215256914-8e147e40-6824-4fb2-8e91-c3d1fa86557e.png">
+
+#### Choice of SMS as reminder type - phone number verification
+<img width="526" alt="Screenshot 2023-01-28 at 09 55 04" src="https://user-images.githubusercontent.com/72509444/215256932-a0c4c237-67f6-451b-a3c3-2cfe87e35f00.png">
+
+#### SMS received for phone number verification
+<img width="442" alt="Screenshot 2023-01-28 at 09 55 53" src="https://user-images.githubusercontent.com/72509444/215256983-6c041dfb-0965-4cc5-a19b-f17906c98262.png">
+
+### Settings - update information from first login
+<img width="679" alt="Screenshot 2023-01-28 at 09 56 37" src="https://user-images.githubusercontent.com/72509444/215257000-6b45add8-7535-4ff0-8d9b-df04ff7bb645.png">
+
