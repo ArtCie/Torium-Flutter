@@ -115,3 +115,34 @@ Delete = admin access
 #### Grant permission + delete group
 <img width="750" alt="Screenshot 2023-01-28 at 10 02 53" src="https://user-images.githubusercontent.com/72509444/215257267-9d82afd6-c311-499d-ac0c-48f5421ec9a2.png">
 
+### Events
+
+#### Main screens - read only
+<img width="747" alt="Screenshot 2023-01-28 at 10 04 08" src="https://user-images.githubusercontent.com/72509444/215257316-505b6805-5e34-4b8c-b1d1-66618bec3370.png">
+
+#### Event members + comment screens
+<img width="738" alt="Screenshot 2023-01-28 at 10 04 38" src="https://user-images.githubusercontent.com/72509444/215257343-36554005-4c66-49f1-a6fd-3778baf878bc.png">
+
+#### Add event
+<img width="859" alt="Screenshot 2023-01-28 at 10 05 21" src="https://user-images.githubusercontent.com/72509444/215257371-8e5934e3-a258-4b47-a32b-d138dd59ff05.png">
+
+#### Add event part 2
+<img width="845" alt="Screenshot 2023-01-28 at 10 05 46" src="https://user-images.githubusercontent.com/72509444/215257391-abae620e-63d6-46bd-b1ef-6335acd288f2.png">
+
+#### Update event
+<img width="784" alt="Screenshot 2023-01-28 at 10 06 18" src="https://user-images.githubusercontent.com/72509444/215257415-97749345-f4c8-4311-a9c9-39c85732fa5b.png">
+
+#### Delete event
+<img width="223" alt="Screenshot 2023-01-28 at 10 06 41" src="https://user-images.githubusercontent.com/72509444/215257435-edee2597-2be5-4497-9203-785ff4b93ef7.png">
+
+### Calendar tab
+<img width="522" alt="Screenshot 2023-01-28 at 10 07 13" src="https://user-images.githubusercontent.com/72509444/215257463-617040e4-4bb9-439e-a328-0939810316b7.png">
+
+### Notification tab
+<img width="538" alt="Screenshot 2023-01-28 at 10 07 38" src="https://user-images.githubusercontent.com/72509444/215257491-cb10802a-c179-4057-a26e-50aaefb3120a.png">
+
+### Received PUSH reminder
+<img width="192" alt="Screenshot 2023-01-28 at 10 08 08" src="https://user-images.githubusercontent.com/72509444/215257510-01a9c963-0239-4b58-a239-f963451f083f.png">
+
+### Received PUSH notifications for group invitation + new event within a group
+<img width="803" alt="Screenshot 2023-01-28 at 10 08 54" src="https://user-images.githubusercontent.com/72509444/215257538-294da6ec-4ac3-441a-944f-8fef686aff8a.png">
