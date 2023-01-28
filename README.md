@@ -1,6 +1,6 @@
 # Torium-Flutter
 
-General description of project can be found here:
+General project description can be found here:
 [TORIUM-Torium-generalinfo-280123-0718.pdf](https://github.com/ArtCie/Torium-Flutter/files/10526567/TORIUM-Torium-generalinfo-280123-0718.pdf)
 
 ## Project dependencies:
@@ -92,6 +92,26 @@ After providing email + password user is redirected to main page.
 #### SMS received for phone number verification
 <img width="442" alt="Screenshot 2023-01-28 at 09 55 53" src="https://user-images.githubusercontent.com/72509444/215256983-6c041dfb-0965-4cc5-a19b-f17906c98262.png">
 
-### Settings - update information from first login
+### Settings
+#### Update information from first login
 <img width="679" alt="Screenshot 2023-01-28 at 09 56 37" src="https://user-images.githubusercontent.com/72509444/215257000-6b45add8-7535-4ff0-8d9b-df04ff7bb645.png">
+
+### Group
+#### Default group views - read only
+Edit = moderator access
+Delete = admin access
+<img width="807" alt="Screenshot 2023-01-28 at 10 00 21" src="https://user-images.githubusercontent.com/72509444/215257169-3302b552-96b0-4bdd-a510-635baaba04ac.png">
+
+#### Setting up a group
+<img width="802" alt="Screenshot 2023-01-28 at 10 01 21" src="https://user-images.githubusercontent.com/72509444/215257217-b2878446-3f89-4f0f-8760-5d39b2755f21.png">
+
+#### Errors - invite user to a group
+<img width="983" alt="Screenshot 2023-01-28 at 10 01 50" src="https://user-images.githubusercontent.com/72509444/215257230-edc9a479-cf68-45c0-b1f5-02147fce648a.png">
+
+
+#### Group update
+<img width="784" alt="Screenshot 2023-01-28 at 10 02 27" src="https://user-images.githubusercontent.com/72509444/215257256-b330a333-7934-44e6-9ecc-52c62669f54c.png">
+
+#### Grant permission + delete group
+<img width="750" alt="Screenshot 2023-01-28 at 10 02 53" src="https://user-images.githubusercontent.com/72509444/215257267-9d82afd6-c311-499d-ac0c-48f5421ec9a2.png">
 
